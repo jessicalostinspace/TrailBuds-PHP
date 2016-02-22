@@ -4,7 +4,7 @@ require_once('header.php');
 ?>
 
 <div class="container">
-  <h2>Home page, top 10 events</h2>
+  <h2>Testing the home page</h2>
 </div>
 
 <?php
