@@ -1,6 +1,7 @@
 <?php
 class Event extends CI_Model
 {
+
 	public function __construct()
    {
     parent::__construct();
@@ -16,5 +17,6 @@ class Event extends CI_Model
    {
    	
    }
+
 }
 ?>
