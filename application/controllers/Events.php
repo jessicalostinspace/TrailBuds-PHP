@@ -3,12 +3,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Events extends CI_Controller {
 
+  public function __construct()
+  {
+    parent::__construct();
+    //$this->load->model('Event');
+  }
+
   public function index()
   {
     $this->load->view('home');
   }
 
-  public function add()
+  public function create()
   {
     $this->load->view('create_event');
   }
