@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>  
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 <style>
   body{
-    background: url('http://i.imgur.com/HrVOqDY.jpg') no-repeat center fixed; 
+    background: url('http://i.imgur.com/HrVOqDY.jpg') no-repeat center fixed;
     background-size:100% auto;
       /*background-size: cover;*/
   }
@@ -24,7 +24,7 @@
     border-radius: 7px;
   }
 
-  #city_search:focus { 
+  #city_search:focus {
     outline: none;
     border-color: #0f3d00;
     box-shadow: 0 0 10px #60b263;
@@ -116,7 +116,7 @@
     </div><!-- /.container-fluid -->
   </nav>
 
-<div class="log"> </div>
+<div class="log" style="background-color: white;"> </div>
 
 
 <div class="container">

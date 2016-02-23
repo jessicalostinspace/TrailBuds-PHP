@@ -26,7 +26,7 @@ class Users extends CI_Controller {
 
     $helper = $fb->getJavaScriptHelper();
 
-    try { 
+    try {
       $accessToken = $helper->getAccessToken();
     } catch(Facebook\Exceptions\FacebookResponseException $e) {
       // When Graph returns an error
@@ -43,16 +43,16 @@ class Users extends CI_Controller {
       exit;
     }
 
-    // Logged in
-    echo '<h3>Access Token</h3>';
-    echo($accessToken->getValue());
+    // // Logged in
+    // echo '<h3>Access Token</h3>';
+    // echo($accessToken->getValue());
 
     $this->session->set_userdata('fb_access_token', $accessToken);
 
 
     try {
       // Returns a `Facebook\FacebookResponse` object
-      $response = $fb->get('/me?fields=id,first_name,last_name,email,birthday,gender,picture', $accessToken);
+      $response = $fb->get('/me?fields=id,name,first_name,last_name,email,birthday,gender,picture', $accessToken);
     } catch(Facebook\Exceptions\FacebookResponseException $e) {
       echo 'Graph returned an error: ' . $e->getMessage();
       exit;
@@ -60,11 +60,72 @@ class Users extends CI_Controller {
       echo 'Facebook SDK returned an error: ' . $e->getMessage();
       exit;
     }
-
+    // get user information from facebook, setting to $user
     $user = $response->getGraphUser();
-    $this->User->create($user);
 
-  }    
+    // rewrite these conditions, checking if the fields exist
+    $email;
+    if($user['email'])
+    {
+      $email = $user['email'];
+    }
+    else
+    {
+      $email = NULL;
+    }
+
+    $birthday;
+    if(isset($user['birthday']))
+    {
+      $birthday = $user['birthday'];
+    }
+    else
+    {
+      $birthday = NULL;
+    }
+
+    // check if user exists in the database
+    $found_user = $this->User->find($user['id']);
+    $current_user = array(
+                          'id' => $user['id'],
+                          'name' => $user['name'],
+                          'first_name' => $user['first_name'],
+                          'email' => $email,
+                          'birthday' => $birthday,
+                          'gender' => $user['gender'],
+                          'picture_url' => $user['picture'],
+                          'logged_in' => TRUE
+                          );
+
+    // if found, set their data to session
+    if($found_user)
+    {
+      $this->session->set_userdata('current_user', $current_user);
+      var_dump($this->session->userdata());
+      die('found');
+    }
+    // if not found create user and set data to session
+    else
+    {
+      $this->User->create($user);
+      $this->session->set_userdata('current_user', $current_user);
+      var_dump($this->session->userdata());
+      die('not found');
+    }
+
+    // view_data['user'] = $this->session->all_userdata
+
+
+  }
+
+  // check if user exists in the database
+  public function find_user($user)
+  {
+
+
+
+  }
+
 
 
 
