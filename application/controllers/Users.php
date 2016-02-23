@@ -118,7 +118,7 @@ class Users extends CI_Controller {
   // takes in @id, displays individual profile
   public function show_profile()
   {
-    $view_data['user'] = $this->session->all_userdata();
+    $view_data['users'] = $this->session->all_userdata();
     $this->load->view('profile_view', $view_data);
   }
 
