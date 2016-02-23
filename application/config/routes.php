@@ -58,7 +58,7 @@ $route['profile'] = 'users/show_profile';
 
 $route['all'] = 'events/show_all';
 $route['add'] = 'events/add';
-$route['show'] = 'events/show';
+$route['show/(:any)'] = 'events/show/$1';
 
 // $route['default_controller'] = 'events';
 $route['404_override'] = '';
