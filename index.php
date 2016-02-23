@@ -1,4 +1,8 @@
 <?php
+
+//Load FB SDK
+require_once __DIR__ . '/fb-php-sdk-v4-5/src/Facebook/autoload.php';
+
 /**
  * CodeIgniter
  *

@@ -11,11 +11,7 @@ class Events extends CI_Controller {
 
   public function index()
   {
-    $this->load->model('Event');
-    $array = $this->Event->show();
-    var_dump($array);
-    die();
-    $this->load->view('home');
+    $this->load->view('login');
   }
 
   public function create()
@@ -33,7 +29,7 @@ class Events extends CI_Controller {
   public function show()
   {
 
-    $this->load->view('single_event');
+    // $this->load->view('single_event');
   }
 
 }

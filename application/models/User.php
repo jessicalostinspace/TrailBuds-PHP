@@ -6,13 +6,12 @@ class User extends CI_Model
 		parent::__construct();
 	}
 
-	// public function create($first_name, $last_name, $email, $password)
-	// {
-	// 	//credential_id =2 is regular user
-	// 	$query = "INSERT INTO users (first_name, last_name, email, password, created_at, updated_at, credential_id) VALUES (?, ?, ?, ?, NOW(), NOW(), 2)";
-	// 	$encrypted_password = password_hash($password, PASSWORD_DEFAULT);
-	// 	return $this->db->query($query, array($first_name, $last_name, $email, $encrypted_password));
-	// }
+	public function create($user)
+	{
+		$query = "INSERT INTO users (facebook_id, first_name, last_name, email, gender, picture_url, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())";
+		$values = array($user['id'], $user['first_name'],$user['last_name'],$user['email'],$user['gender'],$user['picture']['url']);
+		return $this->db->query($query, $values);
+	}
 
 	// public function destroy($id)
 	// {
