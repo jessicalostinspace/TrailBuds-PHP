@@ -14,7 +14,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 <style>
-  body{
+  body {
     background: url('http://i.imgur.com/HrVOqDY.jpg') no-repeat center fixed;
     background-size:100% auto;
       /*background-size: cover;*/
@@ -39,13 +39,18 @@
   	height: 150px;
   	border-radius: 10px;
   }
+
+  #login_button {
+    background: url("<?= base_url('/assets/images/login_button.png') ?>");
+
+  }
+
+
 </style>
 
 </head>
 
 <body>
-<p><a href="#" onClick="logInWithFacebook()">Log In with the JavaScript SDK</a></p>
-
 <script>
  $(document).ready(function(){
 
@@ -55,13 +60,12 @@
         // Now you can redirect the user or do an AJAX request to
         // a PHP script that grabs the signed request from the cookie.
         $.get("/login", function(res){
-          $('.log').html(res);
+          window.location.replace('/users/show_profile');
         });
       } else {
         alert('User cancelled login or did not fully authorize.');
       }
     });
-    return false;
   };
   window.fbAsyncInit = function() {
     FB.init({
@@ -101,6 +105,7 @@
           <li><a href="/all">Events</a></li>
           <li><a href="/signin">Signin</a></li>
           <li><a href="/logout">Logout</a></li>
+          <li><a id="login_button" class="btn" href="#" onClick="logInWithFacebook()"></a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
             <ul class="dropdown-menu">

@@ -101,37 +101,14 @@ class Users extends CI_Controller {
     if($found_user)
     {
       $this->session->set_userdata('current_user', $current_user);
-      var_dump($this->session->userdata());
-      die('found');
     }
     // if not found create user and set data to session
     else
     {
       $this->User->create($user);
       $this->session->set_userdata('current_user', $current_user);
-      var_dump($this->session->userdata());
-      die('not found');
     }
-
-    // view_data['user'] = $this->session->all_userdata
-
-
   }
-
-  // check if user exists in the database
-  public function find_user($user)
-  {
-
-
-
-  }
-
-
-
-
-//NEED TO REDIRECT
-
-
 
   public function logout()
   {
@@ -141,7 +118,8 @@ class Users extends CI_Controller {
   // takes in @id, displays individual profile
   public function show_profile()
   {
-    $this->load->view('profile_view');
+    $view_data['user'] = $this->session->all_userdata();
+    $this->load->view('profile_view', $view_data);
   }
 
 }
