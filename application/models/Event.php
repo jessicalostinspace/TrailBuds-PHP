@@ -20,7 +20,7 @@ class Event extends CI_Model
    	
    }
    public function display_all(){
-    return $this->db->query('SELECT name, description, hike_location, distance, duration, elevation, departure_location, attendees, departure_date from events')->result_array();
+    return $this->db->query('SELECT id, name, description, hike_location, distance, duration, elevation, departure_location, attendees, departure_date from events')->result_array();
    }
 
 }
