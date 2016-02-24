@@ -57,7 +57,7 @@ $route['logout'] = 'users/logout';
 $route['profile'] = 'users/show_profile';
 
 $route['all'] = 'events/show_all';
-$route['add'] = 'events/add';
+$route['create_event'] = 'events/create';
 $route['show/(:any)'] = 'events/show/$1';
 
 // $route['default_controller'] = 'events';
