@@ -87,6 +87,7 @@ class Events extends CI_Controller {
   public function show($id)
   {
     $view_data['event'] = $this->Event->show_by_id($id);
+    // $view_data['event']['departure_location'] = (str_replace(' ', '+', $view_data['event']['departure_location']));
     $this->load->view('single_event', $view_data);
   }
 

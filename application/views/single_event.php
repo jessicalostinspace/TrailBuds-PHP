@@ -10,19 +10,6 @@
     </style>
 
     <div id="map" style="width: 100%; height: 300px;"></div>
-   <!--  'id' => string '1' (length=1)
-     'name' => string 'event' (length=5)
-     'description' => string 'desc' (length=4)
-     'hike_location' => string '113 hrhr rd' (length=11)
-     'departure_location' => string '249 ohfe rd' (length=11)
-     'duration' => string '2' (length=1)
-     'distance' => string '3' (length=1)
-     'elevation' => string '100' (length=3)
-     'departure' => string '2016-02-23 20:12:52' (length=19)
-     'created_at' => string '2016-02-23 20:12:52' (length=19)
-     'updated_at' => string '2016-02-23 20:13:09' (length=19)
-     'drive' => null
-     'attendees' => null -->
 
     <div class="container">
       <div class="row">
@@ -48,16 +35,31 @@
     </div>
 <script>
 
+// CAN ADD GEOCODING CAPABILITIES IN FUTURE
 
+// var origin_coordinates;
 
+// function geocode_center()
+// {
+//   $.get("https://maps.googleapis.com/maps/api/geocode/json?address=<?= $event['departure_location'] ?>&key=AIzaSyApbO-TW6-gkolVfdL1uKgqDCP2rC3fg2A", function(res) {
+//       origin_coordinates = res['results'][0]['geometry']['location'];
+//     }, 'json');
+//   //console.log(origin_coordinates);
+
+//   var center = new google.maps.LatLng(origin_coordinates['lat'], origin_coordinates['lon']);
+//   return center;
+// }
+
+// initialize the map with line between the departure location and the hike location
 function initMap() {
-  var origin = "Chicago, IL";
-  var destination = "Los Angeles, CA";
+
+  var origin = "<?= $event['departure_location'] ?>";
+  var destination = "<?= $event['hike_location'] ?>";
 
   var map = new google.maps.Map(document.getElementById('map'), {
-    // center: origin,
+    // center: center,
     scrollwheel: false,
-    zoom: 7
+    zoom: 8
   });
 
   var directionsDisplay = new google.maps.DirectionsRenderer({
@@ -81,6 +83,7 @@ function initMap() {
   });
 }
 
+// map takes up half of the window height
 $(function () {
   $("#map").css("height", $(window).height() / 2);
 });
