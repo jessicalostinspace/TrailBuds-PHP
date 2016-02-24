@@ -32,7 +32,7 @@
 		bottom: 93px;
 		left: 69px;
 	}
-	h6,h2{
+	.headerinfo{
 		color: white;
 		z-index: 3;
 		position: relative;
@@ -40,6 +40,15 @@
 		top: 15px;
 		margin: 0;
 		text-align: center;
+	}
+	.headerinfo2{
+	    color: white;
+	    z-index: 4;
+	    position: relative;
+	    left: -101px;
+	    top: -31px;
+	    margin: 0;
+	    text-align: center;
 	}
 	#upcoming_events{
 		position: relative;
@@ -55,12 +64,12 @@
 		border-color: #043505;
 	}
 	.message{
-		background-color: #043505;
+	    background-color: #043505;
 	    height: 39px;
 	    width: 120px;
 	    position: relative;
-	    bottom: 216px;
-	    left: 48px;
+	    bottom: 123px;
+	    left: -147px;
 	}
 	#description{
 		width: 196px;
@@ -93,6 +102,52 @@
 	    bottom: 519px;
 	    float: right;
     }
+    .borders{
+    	border: 1px solid #043505;
+    	background-color: white;
+    	border-radius: 5px;
+    }
+    .aboutme{
+	    position: relative;
+	    left: 17px;
+	    bottom: 68px;
+    }
+    .future_events{
+		position: relative;
+	    right: 65px;
+	    bottom: 120px;
+    }
+    .events_near_you{
+	    position: relative;
+	    right: 146px;
+	    bottom: 120px;
+    }
+    .events_near_you h2{
+		border-bottom-style: solid;
+		border-color: black;
+		border-width: 1px;
+		padding-bottom: 8px;
+    }
+    .future_events h2{
+		border-bottom-style: solid;
+		border-color: black;
+		border-width: 1px;
+		padding-bottom: 8px;
+    }
+    .past_events{
+    	position: relative;
+	    right: 63px;
+	    bottom: 100px;
+    }
+    .past_events h2{
+		border-bottom-style: solid;
+		border-color: black;
+		border-width: 1px;
+		padding-bottom: 8px;
+    }
+    .forest{
+    	color: #015604;
+    }
 </style>
 
 
@@ -103,8 +158,8 @@
 			<img class="profile_background .img-responsive" src="/assets/images/treesprofile.jpeg" alt="Trees Default" style="width:1000px;height:300px;">
 			<div class="container profile_header">				
 
-					<h6>Completed Hikes</h6>
-					<h2>5</h2>
+					<h6 class="headerinfo">Completed Hikes</h6>
+					<h2 class="headerinfo">5</h2>
 
 			</div>
 			<img class="profile_picture .img-rounded" src="<?= $user['picture_url']?>" alt="Profile picture" style="width:120px; height:120px;">
@@ -159,8 +214,6 @@
 </div>
 
 <div class="container">
-  <h2>Description Modal</h2>
-
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -193,7 +246,6 @@
     </div>
   </div> 
 </div>
- 
 <script>
 $(document).ready(function(){
     $(".edit").click(function(){
@@ -202,6 +254,85 @@ $(document).ready(function(){
 });
 </script>
 
+	<div class="container">
+		<div class="images row">
+	    	<div class="col-md-12">
+	    		<img class="profile_background .img-responsive" src="/assets/images/treesprofile.jpeg" alt="Trees Default" style="width:1000px;height:300px;">
+				<div class="container profile_header">				
 
+					<h6 class='headerinfo'>Completed Hikes</h6>
+					<h2 class='headerinfo'>5</h2>
+
+					<div style="display: inline;">
+						<h6 class='headerinfo2'>New Messages</h6>
+						<h2 class='headerinfo2'><a style="color:#ff0000;" href="#">7</a></h2>
+					</div>
+				</div>
+				<img class="profile_picture .img-rounded" src="<?= $user['picture_url']?>" alt="Profile picture" style="width:120px; height:120px;">
+				<h1 style="display:inline"><?= $user['first_name']." ".$user['last_name']?></h1>
+	    	</div>
+		</div>
+		<div class="row">
+		 	<div class="aboutme borders col-md-2">
+		 		<h3 class="forest">
+			 		About<a class="edit" style="margin-left: 50px;" href="#">Edit</a>
+		 		</h3>
+			    <p class="location"><?= $user['location'] ?></p>
+			    <p></p>
+			    <p><?= $user['description'] ?></p>
+		 	</div>
+		    <div class="col-md-1">
+		    	<a class="message btn btn-success btn-xs" href="/all"><h5>Message</h5></a>
+		    </div>
+		    <div class="future_events borders col-md-5">
+				<h2 class="forest">Upcoming Hikes</h2>
+
+				<h4><a href="#">No, motherfucker</a></h4>
+				<p>Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a glass motherfuckin' house, fuckin' up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, 'cause I'll kill the motherfucker, know what I'm sayin'? </p>
+
+								<h4><a href="#">No, motherfucker</a></h4>
+				<p>Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a glass motherfuckin' house, fuckin' up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, 'cause I'll kill the motherfucker, know what I'm sayin'? </p>
+
+				<h4><a href="#">No, motherfucker</a></h4>
+				<p>Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a glass motherfuckin' house, fuckin' up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, 'cause I'll kill the motherfucker, know what I'm sayin'? </p>
+
+
+		    </div>
+		    <div class="col-md-1">
+		    	
+		    </div>
+		    <div class="events_near_you borders col-md-3">
+		    	<h2 class="forest">Hikes near you</h2>
+
+				<h5><a href="#">Mt.Rainier this Tuesday!!!</a></h5>
+				<p><i>Tues, May 25</i></p>
+				<p>Location: Paradise-Rainier (295 mi. from you)</p>
+				<p><b>Length:</b> 8 mi. <b>Elev. Gain:</b> 2500 ft.</p>
+				<p></p>
+				<h5><a href="#">Mt.Rainier next Tuesday!!!</a></h5>
+				<p><i>Tues, May 31</i></p>
+				<p>Location: Paradise-Rainier (295 mi. from you)</p>
+				<p><b>Length:</b> 8 mi. <b>Elev. Gain:</b> 2500 ft.</p>
+
+		    </div>
+	 	</div>
+	 	<div class="row">
+		 	<div class="col-md-3"></div>
+	 		<div class="past_events borders col-md-5">
+				<h2 class="forest">Past Hikes</h2>
+
+				<h4><a href="#">Yes, motherfucker</a></h4>
+				<p>Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a glass motherfuckin' house, fuckin' up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, 'cause I'll kill the motherfucker, know what I'm sayin'? </p>
+
+		    </div>
+		</div>
+	 	<div class="row">
+	 		<div class="borders col-md-10">
+		 		<label class="control-label"><h2>Snap a cool pic on the trail? Upload it!</h2></label>
+				<input id="input-1" type="file" class="file">
+				<p></p>
+	 		</div>
+	 	</div>
+	</div>
 
 <?php require_once('footer.php'); ?>

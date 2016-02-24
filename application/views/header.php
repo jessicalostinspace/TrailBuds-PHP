@@ -48,10 +48,29 @@
     js.src = "//connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
+
+    // Fix sticky navbar to top of page 
+    var navbar = $('#navbar-main'),
+        distance = navbar.offset().top,
+        $window = $(window);
+
+    $window.scroll(function() {
+        if ($window.scrollTop() >= distance) {
+            navbar.removeClass('navbar-fixed-top').addClass('navbar-fixed-top');
+            $("body").css("padding-top", "70px");
+        } else {
+            navbar.removeClass('navbar-fixed-top');
+            $("body").css("padding-top", "0px");
+        }
+    });
+
+
  });
+
+
 </script>
 
-  <nav class="navbar navbar-inverse navbar-default">
+  <nav id="navbar-main" class="navbar navbar-inverse navbar-default">
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -61,7 +80,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Trail Buds</a>
+        <a class="navbar-brand" href="/users">TrailBuds</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->

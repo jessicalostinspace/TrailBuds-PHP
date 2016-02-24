@@ -7,6 +7,7 @@ class Users extends CI_Controller {
   {
     parent::__construct();
     $this->load->model('User');
+    $this->load->library('upload');
     // $this->output->enable_profiler(TRUE);
   }
 
@@ -120,7 +121,7 @@ class Users extends CI_Controller {
   {
     // $view_data['user'] = $this->session->all_userdata();
     $id = $this->session->userdata('id');
-    
+
     $view_data['user'] = $this->User->find($id);
 
     $this->load->view('profile_view', $view_data);

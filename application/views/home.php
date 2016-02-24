@@ -42,7 +42,9 @@
 
   #login_button {
     background: url("<?= base_url('/assets/images/login_button.png') ?>");
-
+    background-size: cover;
+    width: 137px;
+    margin-top: 7px;
   }
 
 
