@@ -29,8 +29,9 @@
 
 <div class="container">
   <!-- Trigger the modal with a button -->
+ <div id='peach'>
   <button type="button" class="btn btn-default btn-lg" id="myBtn">Create An Event</button>
-
+</div>
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -179,6 +180,27 @@ $(document).ready(function(){
 }
 .red {
 	color: red;
+}
+.table-bordered{
+	margin:2% auto;
+	background-color: white;
+}
+#peach{
+
+	margin: auto;
+}
+#myBtn{
+	width:15%;
+	margin-left: 40%;
+	color:white;
+	background: url('http://i.imgur.com/6oIQo8M.jpg');
+}
+
+
+body {
+    /*background: url('http://i.imgur.com/HrVOqDY.jpg') no-repeat center fixed;
+    background-size:100% auto;
+      /*background-size: cover;*/
 }
 
 </style>
