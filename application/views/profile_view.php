@@ -151,7 +151,7 @@
 </style>
 
 
-<div class="container">
+<!-- <div class="container">
 
 	<div class="profile">
 		<div class="profile_images">
@@ -212,7 +212,7 @@
 		</div>
 	</div>
 </div>
-
+ -->
 <div class="container">
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -282,7 +282,7 @@ $(document).ready(function(){
 			    <p><?= $user['description'] ?></p>
 		 	</div>
 		    <div class="col-md-1">
-		    	<a class="message btn btn-success btn-xs" href="/all"><h5>Message</h5></a>
+		    	<a class="message btn btn-success btn-xs" href="#"><h5>Message</h5></a>
 		    </div>
 		    <div class="future_events borders col-md-5">
 				<h2 class="forest">Upcoming Hikes</h2>
@@ -334,5 +334,45 @@ $(document).ready(function(){
 	 		</div>
 	 	</div>
 	</div>
+
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="myMsgModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal_header"><span class="glyphicon glyphicon-user"></span> Message <?= $user['first_name'] ?></h4>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+          <form action="/messages/createPersonal" method="post" role="form">
+            <div class="form-group">
+              <label for="usrname"><span class="glyphicon glyphicon-tree-conifer"></span> Message</label>
+              <textarea class="form-control" name="content" id="usrname" placeholder="Enter message..."></textarea>
+            </div>
+              <button type="submit" class="location_btn btn btn-success btn-block"><span class="glyphicon glyphicon-tree-deciduous"></span> Submit</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+
+        </div>
+      </div>
+      
+    </div>
+  </div> 
+</div>
+<script>
+$(document).ready(function(){
+    $(".message").click(function(){
+        $("#myMsgModal").modal();
+    });
+});
+</script>
+
+
+
 
 <?php require_once('footer.php'); ?>
