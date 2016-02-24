@@ -15,7 +15,6 @@
 
 </head>
 <body>
-<p><a href="#" onClick="logInWithFacebook()">Log In with the JavaScript SDK</a></p>
 
 <script>
  $(document).ready(function(){
@@ -52,7 +51,7 @@
  });
 </script>
 
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-inverse navbar-default">
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -62,16 +61,17 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Brand</a>
+        <a class="navbar-brand" href="#">Trail Buds</a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right nav-pills ">
           <li><a href="/profile">Profile</a></li>
           <li><a href="/all">Events</a></li>
           <li><a href="/signin">Signin</a></li>
           <li><a href="/logout">Logout</a></li>
+          <li><a id="login_button" class="btn" href="#" onClick="logInWithFacebook()"></a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -86,6 +86,7 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
+
 
 <div class="log"> </div>
 

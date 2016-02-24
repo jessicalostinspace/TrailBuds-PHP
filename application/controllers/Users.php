@@ -93,20 +93,20 @@ class Users extends CI_Controller {
                           'email' => $email,
                           'birthday' => $birthday,
                           'gender' => $user['gender'],
-                          'picture_url' => $user['picture'],
+                          'picture_url' => $user['picture']['url'],
                           'logged_in' => TRUE
                           );
 
     // if found, set their data to session
     if($found_user)
     {
-      $this->session->set_userdata('current_user', $current_user);
+      $this->session->set_userdata($current_user);
     }
     // if not found create user and set data to session
     else
     {
       $this->User->create($user);
-      $this->session->set_userdata('current_user', $current_user);
+      $this->session->set_userdata($current_user);
     }
   }
 
@@ -118,7 +118,7 @@ class Users extends CI_Controller {
   // takes in @id, displays individual profile
   public function show_profile()
   {
-    $view_data['users'] = $this->session->all_userdata();
+    $view_data['user'] = $this->session->all_userdata();
     $this->load->view('profile_view', $view_data);
   }
 
