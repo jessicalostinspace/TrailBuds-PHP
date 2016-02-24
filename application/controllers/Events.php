@@ -50,7 +50,7 @@ class Events extends CI_Controller {
   $this->form_validation->set_rules('departure_location', 'Meeting Location', 'trim|required');
   $this->form_validation->set_rules('departure_date', 'Departure Date', 'trim|required');
   if ($this->form_validation->run() === FALSE) {
-    
+
       $this->session->set_flashdata('name_error', form_error('name'));
       $this->session->set_flashdata('hike_location_error', form_error('hike_location'));
       $this->session->set_flashdata('distance_error', form_error('distance'));
@@ -64,13 +64,13 @@ class Events extends CI_Controller {
         $this->Event->create_event($table);
         redirect('/events/show_all');
   }
-      
+
   }
 
   // show all events
   public function show_all()
   {
-  
+
     $this->load->view('events');
 
 
@@ -80,14 +80,14 @@ class Events extends CI_Controller {
     $this->load->model('Event');
     $table['events']= $this->Event->display_all();
     $this->load->view('partials/events', $table);
-    
+
   }
 
   // needs to take in parameter for event
-  public function show_events()
+  public function show($id)
   {
-
-    // $this->load->view('single_event');
+    $view_data['event'] = $this->Event->show_by_id($id);
+    $this->load->view('single_event', $view_data);
   }
 
 }
