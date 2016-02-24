@@ -118,8 +118,24 @@ class Users extends CI_Controller {
   // takes in @id, displays individual profile
   public function show_profile()
   {
-    $view_data['user'] = $this->session->all_userdata();
+    // $view_data['user'] = $this->session->all_userdata();
+    $id = $this->session->userdata('id');
+    
+    $view_data['user'] = $this->User->find($id);
+
     $this->load->view('profile_view', $view_data);
+  }
+    //Sends user location and profile description to database
+   //from post on profile_view page
+    public function description()
+  {
+    $location = $this->input->post('location');
+    $description = $this->input->post('description');
+    $id = $this->session->userdata('id');
+
+    $this->User->addProfileInfo($location, $description, $id);
+
+    redirect('/users/show_profile');
   }
 
 }

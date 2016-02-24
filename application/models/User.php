@@ -18,6 +18,16 @@ class User extends CI_Model
 		return $this->db->query($query, $values);
 	}
 
+	public function addProfileInfo($location, $description, $id)
+	{
+		$query = "UPDATE users SET location = ?, description = ?
+					WHERE facebook_id = ?";
+
+		return $this->db->query($query, array($location, $description, $id));
+	}
+
+	
+
 	// public function destroy($id)
 	// {
 	// 	$query = "DELETE FROM users WHERE id = ?";
