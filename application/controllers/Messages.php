@@ -7,21 +7,39 @@ class Messages extends CI_Controller {
   {
     parent::__construct();
     $this->load->model('Message');
+    $this->load->model('User');
     //$this->load->model('Event');
   }
 
   public function index()
   {
-    $this->load->view('');
+
   }
 
   public function createPersonal()
   {
   	$content = $this->input->post('content');
-  	$sender_id = $this->session->userdata('facebook_id');
-  	$receiver_id = $this->input->post('receiver_id');
 
-  	$this->Message->create_personal($content, $sender_id, $user_id);
+  	//This should be users auto incremented id
+  	$sender_id = $this->session->userdata('id');
+
+  	
+  	$receiver_id = $this->session->userdata('id');
+  	//NEED TO FIGURE OUT HOW TO GRAB THIS
+  	// $receiver_id = $this->input->post('receiver_id');
+
+  	  	//This should be users auto incremented id USING AS TEST 
+  	// $receiver_id = $this->session->userdata('id');
+  	$this->Message->create_personal($content, $sender_id, $receiver_id);
+  	redirect('/users/show_profile');
+  }
+
+  public function showPersonal()
+  {
+  	$id = $this->session->userdata('id');
+   	$messages['messages'] = $this->Message->getAllPersonal($id);
+   	// var_dump($messages); die;
+    $this->load->view('/partials/messages', $messages); 	
   }
 }
 ?>

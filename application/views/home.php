@@ -62,7 +62,8 @@
         // Now you can redirect the user or do an AJAX request to
         // a PHP script that grabs the signed request from the cookie.
         $.get("/login", function(res){
-          window.location.replace('/users/show_profile');
+          window.location.replace('/users/show_profile/');
+          console.log(res);
         });
       } else {
         alert('User cancelled login or did not fully authorize.');

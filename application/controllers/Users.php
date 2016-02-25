@@ -7,6 +7,7 @@ class Users extends CI_Controller {
   {
     parent::__construct();
     $this->load->model('User');
+    $this->load->model('Message');
     $this->load->library('upload');
     // $this->output->enable_profiler(TRUE);
   }
@@ -87,8 +88,13 @@ class Users extends CI_Controller {
 
     // check if user exists in the database
     $found_user = $this->User->find($user['id']);
+
+    //Set user auto-incremented ID from database
+    $user_id = $this->User->getUserID($user['id']);
+
     $current_user = array(
-                          'id' => $user['id'],
+                          'id' => $user_id,
+                          'facebook_id' => $user['id'],
                           'name' => $user['name'],
                           'first_name' => $user['first_name'],
                           'email' => $email,

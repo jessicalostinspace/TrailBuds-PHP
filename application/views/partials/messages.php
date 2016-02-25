@@ -1,0 +1,31 @@
+
+
+
+<div class="container">
+	<div class="row">
+	 	<div class="col-md-3"></div>
+	    <div class="borders col-md-6">
+	    	<h1 class="forest">Messages</h1>
+	    	<p></p>
+	    	<table class="table table-bordered table-hover">
+	    		<thead>
+	    			<tr>
+	    				<td>From</td>
+	    				<td>Last Activity</td>
+	    			</tr>
+	    		</thead>
+	    		<?php
+	    		foreach($messages as $message)
+	    			{ ?>
+	    				<tr>
+	    					<td><?= $message['first_name'].$message['last_name'] ?></td>
+	    					<td><?= $message['updated_at']?></td>
+	    				</tr>
+	    			<?php
+	    			}?>
+	    	</table>	
+	    </div>
+	 	<div class="col-md-3"></div>
+ 	</div>
+</div>
+
