@@ -9,9 +9,11 @@
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href=<?= base_url('/assets/style.css') ?>>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src=<?= base_url('/assets/main.js') ?>></script>
 
     <!-- home styling -->
     <style>
@@ -55,7 +57,7 @@
       right: 41px;
   }
 
-</style>  
+</style>
  <!-- home styling -->
 
 </head>
@@ -84,7 +86,7 @@
  //    var token = "<?= $this->session->userdata('fb_access_token');?>";
   //   FB.logout(function(response) {
   //         // Logout from the site and facebook
-  //     $(location).attr('href', 'http://localhost:8888');    
+  //     $(location).attr('href', 'http://localhost:8888');
   //    });
   // });
 
@@ -112,7 +114,7 @@ function logOutWithFacebook() {
     FB.getLoginStatus(function(response) {
       console.log(response);
       if (response && response.status === "connected") {
-        
+
         FB.logout(function(response) {
            $.get('logout');
           if (response.status != "connected") {
@@ -123,7 +125,7 @@ function logOutWithFacebook() {
         });
       }
     });
-    
+
 
     //if we do have a non-null response.session, call FB.logout(),
     //the JS method will log the user out of Facebook and remove any authorization cookies
@@ -146,7 +148,7 @@ function logOutWithFacebook() {
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
 
-    // Fix sticky navbar to top of page 
+    // Fix sticky navbar to top of page
     var navbar = $('#navbar-main'),
         distance = navbar.offset().top,
         $window = $(window);
@@ -160,7 +162,7 @@ function logOutWithFacebook() {
             $("body").css("padding-top", "0px");
         }
     });
-      
+
  });
 
 
@@ -182,13 +184,13 @@ function logOutWithFacebook() {
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right nav-pills ">
-        <?php 
+        <?php
           if($this->session->userdata( 'fb_access_token' )){
 ?>
           <li><a href="/users">Profile</a></li>
           <?php } ?>
           <li><a href="/all">Events</a></li>
-                 <?php 
+                 <?php
           if($this->session->userdata( 'fb_access_token' )){
 ?>
           <li><a id="fb_logout" class="btn" href="#">Logout</a></li>
