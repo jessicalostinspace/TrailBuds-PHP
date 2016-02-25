@@ -122,6 +122,10 @@
     #newMsg{
     	color:#ff0000;
     }
+    .msg_bubble{
+    	padding:10px;
+    	margin:10px;
+    }
 
       p.right {
         float: right;
@@ -152,4 +156,9 @@
 
       textarea.form-control {
         resize: none;
+      }
+      #msgs_container{
+      	overflow: scroll;
+      	height: 400px;
+      	overflow-y: auto;
       }
