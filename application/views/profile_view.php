@@ -271,6 +271,21 @@ $(document).ready(function(){
 		$.get($(this).attr('href'), function(res){
 				$('#replaced').html(res);	
 			}, 'html');
+
+    $("#view_chat").click(function(){
+	    $("#privateMsgModal").modal();
+    });	
+
+    // $.get('https://api.layer.com', function(res){
+
+    // }, 'json');    
+    $.ajax({
+         url: "https://api.layer.com",
+         type: "GET",
+         Accept: application/vnd.layer+json; version=1.1,
+         Authorization: Bearer TOKEN,
+
+      });
 	return false;
 	});
 
@@ -369,13 +384,13 @@ $(document).ready(function(){
           <h4 class="modal_header"><span class="glyphicon glyphicon-user"></span> Message <?= $user['first_name'] ?></h4>
         </div>
         <div class="modal-body" style="padding:40px 50px;">
-            <form id="messagebtn" action="/messages/createPersonal" method="post" role="form">
-	            <div class="form-group">
-		            <label for="usrname"><span class="glyphicon glyphicon-tree-conifer"></span> Message</label>
-		            <textarea class="form-control" name="content" id="usrname" placeholder="Enter message..."></textarea>
-		            <!-- <input type="hidden" name="receiver_id" value="#"></input> -->
-	            </div>
-	              <button type="submit" class="location_btn btn btn-success btn-block"><span class="glyphicon glyphicon-tree-deciduous"></span> Submit</button>
+            <form id="messagebtn" action="/messages/createPersonal/<?=$user['id'] ?>" method="post" role="form">
+		            <div class="form-group">
+			            <label for="usrname"><span class="glyphicon glyphicon-tree-conifer"></span> Message</label>
+			            <textarea class="form-control" name="content" id="usrname" placeholder="Enter message..."></textarea>
+			            <!-- <input type="hidden" name="receiver_id" value="#"></input> -->
+		            </div>
+		              <button type="submit" class="location_btn btn btn-success btn-block"><span class="glyphicon glyphicon-tree-deciduous"></span> Submit</button>
             </form>
         </div>
         <div class="modal-footer">

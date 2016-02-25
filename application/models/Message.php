@@ -21,13 +21,14 @@ class Message extends CI_Model
   //this id is session id to display on personal messages page
   public function getAllPersonal($id)
   {
-  	$query = "SELECT messages.content, sender.id, sender.first_name, sender.last_name, messages.updated_at
+  	$query = "SELECT messages.content, sender.picture_url, sender.id, sender.first_name, sender.last_name, messages.updated_at
   			FROM messages 
   			LEFT JOIN users AS sender
   			ON messages.sender_id = sender.id
   			LEFT JOIN users AS receiver
   			ON messages.receiver_id = receiver.id
-  			WHERE receiver_id = ?";
+  			WHERE receiver_id = ?
+  			ORDER BY messages.updated_at DESC;";
   			// var_dump($query);
   			// var_dump($this->db->query($query, array($id))->result_array());die;
   	return $this->db->query($query, array($id))->result_array();

@@ -45,6 +45,16 @@
     margin-top: 7px;
   }
 
+    #logo {
+      background: url("http://localhost:8888/assets/images/logo6.png") no-repeat;
+      background-size: contain;
+      display: inline-block;
+      width: 196px;
+      margin-top: 3px;
+      position: relative;
+      right: 41px;
+  }
+
 </style>  
  <!-- home styling -->
 
@@ -63,8 +73,6 @@
         $.get("/login", function(res){
           window.location.replace('/users/show_profile/' + res);
         });
-
-        console.log("hello");
       } else {
         alert('User cancelled login or did not fully authorize.');
       }
@@ -168,7 +176,7 @@ function logOutWithFacebook() {
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/users">TrailBuds</a>
+        <a id="logo" class="navbar-brand" href="/users"></a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -177,7 +185,7 @@ function logOutWithFacebook() {
         <?php 
           if($this->session->userdata( 'fb_access_token' )){
 ?>
-          <li><a href="/profile">Profile</a></li>
+          <li><a href="/users">Profile</a></li>
           <?php } ?>
           <li><a href="/all">Events</a></li>
                  <?php 

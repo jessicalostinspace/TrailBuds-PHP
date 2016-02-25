@@ -16,20 +16,14 @@ class Messages extends CI_Controller {
 
   }
 
-  public function createPersonal()
+  public function createPersonal($id)
   {
   	$content = $this->input->post('content');
 
   	//This should be users auto incremented id
   	$sender_id = $this->session->userdata('id');
 
-  	$receiver_id = $this->session->userdata('id');
-  	//NEED TO FIGURE OUT HOW TO GRAB THIS
-  	// $receiver_id = $this->input->post('receiver_id');
-
-  	  	//This should be users auto incremented id USING AS TEST 
-  	// $receiver_id = $this->session->userdata('id');
-  	$this->Message->create_personal($content, $sender_id, $receiver_id);
+  	$this->Message->create_personal($content, $sender_id, $id);
   	redirect('/users/show_profile');
   }
 
@@ -38,6 +32,7 @@ class Messages extends CI_Controller {
   	$id = $this->session->userdata('id');
    	$messages['messages'] = $this->Message->getAllPersonal($id);
    	// var_dump($messages); die;
+
     $this->load->view('/partials/messages', $messages); 	
   }
 }
