@@ -19,7 +19,7 @@
 	    				<tr>
 	    					<!-- <h5>Messages</h5> -->
 	    					<td><button class="view_chat"><?= $message['first_name']." ".$message['last_name'] ?></button></td>
-	    					<td><?= $message['updated_at']?></td>
+	    					<td><?= date("l, F j, Y" ,strtotime($message['updated_at']))?></td>
 	    				</tr>
 	    			<?php
 	    			}?>

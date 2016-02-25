@@ -86,10 +86,16 @@ $(document).ready(function(){
 					<h6 class='headerinfo'>Completed Hikes</h6>
 					<h2 class='headerinfo'>5</h2>
 
+			 		<?php
+					if($this->session->userdata('id') == $user['id'])
+			 		{ ?>
 					<div style="display: inline;">
 						<h6 class='headerinfo2'>New Messages</h6>
 						<h2 class='headerinfo2'><a class="newMsg" href="/messages/showPersonal">7</a></h2>
 					</div>
+			 		<?php
+			 		} ?>
+
 				</div>
 				<img class="profile_picture .img-rounded" src="http://graph.facebook.com/<?= $user['facebook_id']?>/picture?type=large" alt="Profile picture" style="width:120px; height:120px;">
 				<!-- http://graph.facebook.com/{ID}/picture?type=large -->
@@ -100,7 +106,13 @@ $(document).ready(function(){
 		<div class="row">
 		 	<div class="aboutme borders col-sm-2">
 		 		<h3 class="forest">
-			 		About<a class="edit" href="#">Edit</a>
+			 		About
+			 		<?php
+			 		if($this->session->userdata('id') == $user['id'])
+			 		{ ?>
+			 			<a class="edit" href="#">Edit</a>
+			 		<?php
+			 		} ?>
 		 		</h3>
 			    <p class="location"><?= $user['location'] ?></p>
 			    <p></p>

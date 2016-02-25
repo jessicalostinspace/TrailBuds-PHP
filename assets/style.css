@@ -1,4 +1,4 @@
-
+/*<----------------------PROFILE PAGE STYLING-------------------------*/
 	.profile_images{
 		height:350px;
 	}
@@ -89,7 +89,7 @@
     .borders{
     	border: 1px solid #043505;
     	background-color: white;
-    	border-radius: 5px;
+    	border-radius: 2px;
     }
     .aboutme{
 	    position: relative;
@@ -126,6 +126,12 @@
     	padding:10px;
     	margin:10px;
     }
+      #msgs_container{
+      	overflow: scroll;
+      	height: 400px;
+      	overflow-y: auto;
+      }
+/*<----------------------SINGLE EVENT PAGE STYLING-------------------------*/
 
       p.right {
         float: right;
@@ -157,8 +163,12 @@
       textarea.form-control {
         resize: none;
       }
-      #msgs_container{
-      	overflow: scroll;
-      	height: 400px;
-      	overflow-y: auto;
-      }
+
+
+ /*<----------------------ALL EVENTS PAGE STYLING-------------------------*/     
+
+
+
+
+
+
