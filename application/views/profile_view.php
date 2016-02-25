@@ -53,25 +53,27 @@ $(document).ready(function(){
 	    $("#myMsgModal").modal();
     });
 
-	$('#newMsg').click(function(){
+	$('.newMsg').click(function(){
 		$.get($(this).attr('href'), function(res){
 				$('#replaced').html(res);	
 			}, 'html');
 
-    $("#view_chat").click(function(){
+    $("body").on("click", ".view_chat",function(){
+    	// alert("test");
+
 	    $("#privateMsgModal").modal();
     });	
 
     // $.get('https://api.layer.com', function(res){
 
     // }, 'json');    
-    $.ajax({
-         url: "https://api.layer.com",
-         type: "GET",
-         Accept: "application/vnd.layer+json; version=1.1",
-         Authorization: "Bearer TOKEN",
 
-      });
+    // $.ajax({
+    //      url: "https://api.layer.com",
+    //      type: "GET",
+    //      Accept: application/vnd.layer+json; version=1.1,
+    //      Authorization: Bearer TOKEN,
+    //   });
 	return false;
 	});
 
@@ -80,7 +82,7 @@ $(document).ready(function(){
 
 	<div class="container">
 		<div class="images row">
-	    	<div class="col-md-12">
+	    	<div class="col-sm-12">
 	    		<img class="profile_background .img-responsive" src="/assets/images/treesprofile.jpeg" alt="Trees Default">
 				<div class="container profile_header">				
 
@@ -89,7 +91,7 @@ $(document).ready(function(){
 
 					<div style="display: inline;">
 						<h6 class='headerinfo2'>New Messages</h6>
-						<h2 class='headerinfo2'><a id="newMsg" href="/messages/showPersonal">7</a></h2>
+						<h2 class='headerinfo2'><a class="newMsg" href="/messages/showPersonal">7</a></h2>
 					</div>
 				</div>
 				<img class="profile_picture .img-rounded" src="http://graph.facebook.com/<?= $user['facebook_id']?>/picture?type=large" alt="Profile picture" style="width:120px; height:120px;">
@@ -111,7 +113,7 @@ $(document).ready(function(){
 		    <div class="col-sm-1">
 		    	<a class="message btn btn-success btn-xs" href="#"><h5>Message</h5></a>
 		    </div>
-			<div class="future_events borders col-md-5">
+			<div class="future_events borders col-sm-5">
 				<h2 class="forest">Upcoming Hikes</h2>
 
 				<h4><a href="#">No, motherfucker</a></h4>
@@ -141,7 +143,7 @@ $(document).ready(function(){
 
 		    </div>
 	 	<div class="row">
-		 	<div class="col-sm-3"></div>
+		 	<div class="col-sm-4"></div>
 	 		<div class="past_events borders col-sm-5">
 				<h2 class="forest">Past Hikes</h2>
 
@@ -172,7 +174,7 @@ $(document).ready(function(){
           <h4 class="modal_header"><span class="glyphicon glyphicon-user"></span> Message <?= $user['first_name'] ?></h4>
         </div>
         <div class="modal-body" style="padding:40px 50px;">
-            <form id="messagebtn" action="/messages/createPersonal/<?=$user['id'] ?>" method="post" role="form">
+            <form id="messagebtn" action="/messages/createPersonal/<?= $user['id'] ?>" method="post" role="form">
 		            <div class="form-group">
 			            <label for="usrname"><span class="glyphicon glyphicon-tree-conifer"></span> Message</label>
 			            <textarea class="form-control" name="content" id="usrname" placeholder="Enter message..."></textarea>
@@ -190,7 +192,6 @@ $(document).ready(function(){
     </div>
   </div> 
 </div>
-
 
 
 

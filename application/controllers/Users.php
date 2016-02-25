@@ -156,7 +156,7 @@ class Users extends CI_Controller {
 
     $this->User->addProfileInfo($location, $description, $id);
 
-    redirect('/users/show_profile');
+    redirect('/users/show_profile/'.$id['id']);
   }
 
 }
