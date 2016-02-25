@@ -100,7 +100,7 @@ window.onload=function()
     //and if you authenticated via oAuth (server side), this is necessary.
     //If you logged in via the JavaScript SDK, you can simply call FB.logout()
     //once the login status is fetched, call handleSessionResponse
-    FB.getLoginStatus(logOutWithFacebook);
+    // FB.getLoginStatus(logOutWithFacebook);
 }
 
 
@@ -116,7 +116,6 @@ function logOutWithFacebook() {
       if (response && response.status === "connected") {
 
         FB.logout(function(response) {
-           $.get('logout');
           if (response.status != "connected") {
 
              window.location = "/";
@@ -124,6 +123,8 @@ function logOutWithFacebook() {
           }
         });
       }
+      
+      $.get('logout');
     });
 
 
@@ -189,10 +190,10 @@ function logOutWithFacebook() {
 
           if($logged_in) {
 ?>
-          <li><a href="/users">Profile</a></li>
+          <li><a href="/profile/<?= $this->session->userdata('id')['id']; ?>">Profile</a></li>
 <?php } 
 ?>
-          <li><a href="<?= $logged_in ? '/all' : '/'; ?>">Events</a></li>
+          <li><a href="/all">Events</a></li>
 <?php
           if($logged_in){
 ?>

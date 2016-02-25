@@ -1,5 +1,8 @@
 <?php require_once('header.php'); 
 
+	// var_dump($this->input->session);
+	// die();
+
 	if(!$this->session->userdata( 'fb_access_token' )){
 		redirect("/");
 	}
