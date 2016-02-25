@@ -190,7 +190,7 @@ function logOutWithFacebook() {
 
           if($logged_in) {
 ?>
-          <li><a href="/profile/<?= $this->session->userdata('id')['id']; ?>">Profile</a></li>
+          <li><a href="/profile/<?= $this->session->userdata('id')['id'] ?>">Profile</a></li>
 <?php } 
 ?>
           <li><a href="/all">Events</a></li>

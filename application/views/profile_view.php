@@ -46,6 +46,7 @@
 <script>
 $(document).ready(function(){
     $(".edit").click(function(){
+    	console.log("test");
         $("#myModal").modal();
     });
 
@@ -88,16 +89,18 @@ $(document).ready(function(){
 
 					<h6 class='headerinfo'>Completed Hikes</h6>
 					<h2 class='headerinfo'>5</h2>
+			 		
+					<div style="display: inline;">
 
 			 		<?php
-					if($this->session->userdata('id') == $user['id'])
+			 		// var_dump($user);die;
+					if($this->session->userdata('id')['id'] == $user['id'])
 			 		{ ?>
-					<div style="display: inline;">
 						<h6 class='headerinfo2'>New Messages</h6>
 						<h2 class='headerinfo2'><a class="newMsg" href="/messages/showPersonal">7</a></h2>
-					</div>
 			 		<?php
 			 		} ?>
+					</div>
 
 				</div>
 				<img class="profile_picture .img-rounded" src="http://graph.facebook.com/<?= $user['facebook_id']?>/picture?type=large" alt="Profile picture" style="width:120px; height:120px;">
@@ -111,7 +114,7 @@ $(document).ready(function(){
 		 		<h3 class="forest">
 			 		About
 			 		<?php
-			 		if($this->session->userdata('id') == $user['id'])
+			 		if($this->session->userdata('id')['id'] == $user['id'])
 			 		{ ?>
 			 			<a class="edit" href="#">Edit</a>
 			 		<?php
