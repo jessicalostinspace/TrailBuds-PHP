@@ -64,12 +64,12 @@ $(document).ready(function(){
     // $.get('https://api.layer.com', function(res){
 
     // }, 'json');    
+
     // $.ajax({
     //      url: "https://api.layer.com",
     //      type: "GET",
     //      Accept: application/vnd.layer+json; version=1.1,
     //      Authorization: Bearer TOKEN,
-
     //   });
 	return false;
 	});
@@ -91,7 +91,9 @@ $(document).ready(function(){
 						<h2 class='headerinfo2'><a class="newMsg" href="/messages/showPersonal">7</a></h2>
 					</div>
 				</div>
-				<img class="profile_picture .img-rounded" src="<?= $user['picture_url']?>" alt="Profile picture">
+				<img class="profile_picture .img-rounded" src="http://graph.facebook.com/<?= $user['facebook_id']?>/picture?type=large" alt="Profile picture" style="width:120px; height:120px;">
+				<!-- http://graph.facebook.com/{ID}/picture?type=large -->
+
 				<h1 class="username_display"><?= $user['first_name']." ".$user['last_name']?></h1>
 	    	</div>
 		</div>
