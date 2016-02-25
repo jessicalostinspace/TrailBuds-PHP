@@ -133,11 +133,11 @@ class Users extends CI_Controller {
   // takes in @id, displays individual profile
   public function show_profile()
   {
-    // $view_data['user'] = $this->session->all_userdata();
-    $id = $this->session->userdata('id');
+    // WE SHOULD CHANGE QUERY AND SEND IN USER ID FROM SESSION
+    //INSTEAD OF FB ID
+    $fb_id = $this->session->userdata('facebook_id');
 
-    $view_data['user'] = $this->User->find($id);
-
+    $view_data['user'] = $this->User->find($fb_id);
     $this->load->view('profile_view', $view_data);
   }
     //Sends user location and profile description to database
