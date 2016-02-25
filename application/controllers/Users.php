@@ -7,6 +7,7 @@ class Users extends CI_Controller {
   {
     parent::__construct();
     $this->load->model('User');
+    $this->load->model('Message');
     $this->load->library('upload');
     // $this->output->enable_profiler(TRUE);
   }
@@ -87,9 +88,17 @@ class Users extends CI_Controller {
 
     // check if user exists in the database
     $found_user = $this->User->find($user['id']);
+<<<<<<< HEAD
     $this->session->set_userdata('user_id', $found_user['id']);
+=======
+
+    //Set user auto-incremented ID from database
+    $user_id = $this->User->getUserID($user['id']);
+
+>>>>>>> be8dd8507fef1ef96472cac0c6801500609ad4d3
     $current_user = array(
-                          'id' => $user['id'],
+                          'id' => $user_id,
+                          'facebook_id' => $user['id'],
                           'name' => $user['name'],
                           'first_name' => $user['first_name'],
                           'email' => $email,
@@ -103,28 +112,35 @@ class Users extends CI_Controller {
     if($found_user)
     {
       $this->session->set_userdata($current_user);
+      echo $user_id['id'];
     }
     // if not found create user and set data to session
     else
     {
       $this->User->create($user);
       $this->session->set_userdata($current_user);
+      echo $user_id['id'];
     }
+
   }
 
   public function logout()
   {
 
+     // Logs off session from website
+             // $this->load->library('facebook');
+            // $data['login_url']=null;
+             // $this->facebook->destroySession();
+            // $_SESSION['do_not_auto_login']=true;
+            // Make sure you destory website session as well.
+    $this->session->sess_destroy();
+    redirect('/');
   }
 
   // takes in @id, displays individual profile
-  public function show_profile()
+  public function show_profile($id)
   {
-    // $view_data['user'] = $this->session->all_userdata();
-    $id = $this->session->userdata('id');
-
-    $view_data['user'] = $this->User->find($id);
-
+    $view_data['user'] = $this->User->getAllInfo($id);
     $this->load->view('profile_view', $view_data);
   }
     //Sends user location and profile description to database
@@ -141,4 +157,3 @@ class Users extends CI_Controller {
   }
 
 }
-?>

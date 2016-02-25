@@ -1,4 +1,9 @@
-<?php require_once('header.php'); ?>
+<?php require_once('header.php'); 
+
+	if(!$this->session->userdata( 'fb_access_token' )){
+		redirect("/");
+	}
+?>
 
 
 <style type="text/css">
@@ -27,10 +32,11 @@
 		bottom: 130px;
 		left: 48px;
 	}
-	h1{
+	.username_display{
 		position: relative;
 		bottom: 93px;
 		left: 69px;
+		display:inline;
 	}
 	.headerinfo{
 		color: white;
@@ -148,6 +154,11 @@
     .forest{
     	color: #015604;
     }
+    .ajaxmsg{
+		position: relative;
+	    right: 36px;
+	    bottom: 114px;
+    }
 </style>
 
 
@@ -251,6 +262,33 @@ $(document).ready(function(){
     $(".edit").click(function(){
         $("#myModal").modal();
     });
+
+    $(".message").click(function(){
+	    $("#myMsgModal").modal();
+    });
+
+	$('#newMsg').click(function(){
+		$.get($(this).attr('href'), function(res){
+				$('#replaced').html(res);	
+			}, 'html');
+
+    $("#view_chat").click(function(){
+	    $("#privateMsgModal").modal();
+    });	
+
+    // $.get('https://api.layer.com', function(res){
+
+    // }, 'json');    
+    $.ajax({
+         url: "https://api.layer.com",
+         type: "GET",
+         Accept: application/vnd.layer+json; version=1.1,
+         Authorization: Bearer TOKEN,
+
+      });
+	return false;
+	});
+
 });
 </script>
 
@@ -265,11 +303,11 @@ $(document).ready(function(){
 
 					<div style="display: inline;">
 						<h6 class='headerinfo2'>New Messages</h6>
-						<h2 class='headerinfo2'><a style="color:#ff0000;" href="#">7</a></h2>
+						<h2 class='headerinfo2'><a id="newMsg" style="color:#ff0000;" href="/messages/showPersonal">7</a></h2>
 					</div>
 				</div>
 				<img class="profile_picture .img-rounded" src="<?= $user['picture_url']?>" alt="Profile picture" style="width:120px; height:120px;">
-				<h1 style="display:inline"><?= $user['first_name']." ".$user['last_name']?></h1>
+				<h1 class="username_display"><?= $user['first_name']." ".$user['last_name']?></h1>
 	    	</div>
 		</div>
 		<div class="row">
@@ -281,22 +319,21 @@ $(document).ready(function(){
 			    <p></p>
 			    <p><?= $user['description'] ?></p>
 		 	</div>
+<div id="replaced">		    
 		    <div class="col-md-1">
 		    	<a class="message btn btn-success btn-xs" href="#"><h5>Message</h5></a>
 		    </div>
-		    <div class="future_events borders col-md-5">
+			<div class="future_events borders col-md-5">
 				<h2 class="forest">Upcoming Hikes</h2>
 
 				<h4><a href="#">No, motherfucker</a></h4>
 				<p>Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a glass motherfuckin' house, fuckin' up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, 'cause I'll kill the motherfucker, know what I'm sayin'? </p>
 
-								<h4><a href="#">No, motherfucker</a></h4>
+				<h4><a href="#">No, motherfucker</a></h4>
 				<p>Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a glass motherfuckin' house, fuckin' up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, 'cause I'll kill the motherfucker, know what I'm sayin'? </p>
 
 				<h4><a href="#">No, motherfucker</a></h4>
 				<p>Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a glass motherfuckin' house, fuckin' up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, 'cause I'll kill the motherfucker, know what I'm sayin'? </p>
-
-
 		    </div>
 		    <div class="col-md-1">
 		    	
@@ -315,7 +352,6 @@ $(document).ready(function(){
 				<p><b>Length:</b> 8 mi. <b>Elev. Gain:</b> 2500 ft.</p>
 
 		    </div>
-	 	</div>
 	 	<div class="row">
 		 	<div class="col-md-3"></div>
 	 		<div class="past_events borders col-md-5">
@@ -333,6 +369,7 @@ $(document).ready(function(){
 				<p></p>
 	 		</div>
 	 	</div>
+</div>			    
 	</div>
 
 <div class="container">
@@ -347,13 +384,14 @@ $(document).ready(function(){
           <h4 class="modal_header"><span class="glyphicon glyphicon-user"></span> Message <?= $user['first_name'] ?></h4>
         </div>
         <div class="modal-body" style="padding:40px 50px;">
-          <form action="/messages/createPersonal" method="post" role="form">
-            <div class="form-group">
-              <label for="usrname"><span class="glyphicon glyphicon-tree-conifer"></span> Message</label>
-              <textarea class="form-control" name="content" id="usrname" placeholder="Enter message..."></textarea>
-            </div>
-              <button type="submit" class="location_btn btn btn-success btn-block"><span class="glyphicon glyphicon-tree-deciduous"></span> Submit</button>
-          </form>
+            <form id="messagebtn" action="/messages/createPersonal/<?=$user['id'] ?>" method="post" role="form">
+		            <div class="form-group">
+			            <label for="usrname"><span class="glyphicon glyphicon-tree-conifer"></span> Message</label>
+			            <textarea class="form-control" name="content" id="usrname" placeholder="Enter message..."></textarea>
+			            <!-- <input type="hidden" name="receiver_id" value="#"></input> -->
+		            </div>
+		              <button type="submit" class="location_btn btn btn-success btn-block"><span class="glyphicon glyphicon-tree-deciduous"></span> Submit</button>
+            </form>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
@@ -364,13 +402,7 @@ $(document).ready(function(){
     </div>
   </div> 
 </div>
-<script>
-$(document).ready(function(){
-    $(".message").click(function(){
-        $("#myMsgModal").modal();
-    });
-});
-</script>
+
 
 
 
