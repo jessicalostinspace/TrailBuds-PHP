@@ -20,8 +20,7 @@ class Event extends CI_Model
    {
 
    }
-<<<<<<< HEAD
-   public function display_all()
+   public function display_everything()
    {
     return $this->db->query("SELECT *, (events.attendees - count(attendees.id)) as 'attendees_remaining' from events left join attendees on attendees.event_id=events.id group by events.id order by departure_date")->result_array();
    }
@@ -40,11 +39,11 @@ class Event extends CI_Model
     public function display_spots_most()
     {
     return $this->db->query("SELECT *, (events.attendees - count(attendees.id)) as 'attendees_remaining' from events left join attendees on attendees.event_id=events.id group by events.id order by attendees_remaining desc")->result_array();
-=======
+  }
 
-   public function display_all(){
+   public function display_all()
+   {
     return $this->db->query('SELECT id, name, description, hike_location, distance, duration, elevation, departure_location, attendees, departure_date from events')->result_array();
->>>>>>> be8dd8507fef1ef96472cac0c6801500609ad4d3
    }
 
    public function show_by_id($id)

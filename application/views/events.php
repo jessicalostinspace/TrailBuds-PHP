@@ -328,7 +328,7 @@ $(document).ready(function(){
 }
 
 #peach{
-	margin-left: 21%;
+	margin-left: 10%;
 	display: inline-block;
 	width: 16%;
 	vertical-align: bottom;
@@ -358,7 +358,6 @@ $(document).ready(function(){
 	margin-top: 5%;
 	padding: 4%;
 	border:1px solid grey;
-	border-radius: 20px;
 	padding-bottom: 2%;
 
 }
@@ -425,8 +424,14 @@ body{
   height: 6em;
   margin-left: -6.1%;
   margin-top: -2%;
-
-
+  padding-top: .5%;
+  position: fixed;
+  z-index: 5;
+  padding-left: 5%;
+}
+#orange{
+  margin-top: 5%;
+}
 
 </style>
 

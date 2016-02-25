@@ -88,14 +88,14 @@ class Users extends CI_Controller {
 
     // check if user exists in the database
     $found_user = $this->User->find($user['id']);
-<<<<<<< HEAD
-    $this->session->set_userdata('user_id', $found_user['id']);
-=======
+
+   
+
 
     //Set user auto-incremented ID from database
     $user_id = $this->User->getUserID($user['id']);
 
->>>>>>> be8dd8507fef1ef96472cac0c6801500609ad4d3
+
     $current_user = array(
                           'id' => $user_id,
                           'facebook_id' => $user['id'],

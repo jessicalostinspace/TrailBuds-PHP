@@ -87,7 +87,7 @@ class Events extends CI_Controller {
   public function display_all_events(){
 
     $this->load->model('Event');
-    $table['events']= $this->Event->display_all();
+    $table['events']= $this->Event->display_everything();
     $this->load->view('partials/events', $table);
 
   }
