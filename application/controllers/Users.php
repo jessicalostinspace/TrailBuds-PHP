@@ -120,6 +120,14 @@ class Users extends CI_Controller {
   public function logout()
   {
 
+     // Logs off session from website
+             // $this->load->library('facebook');
+            // $data['login_url']=null;
+             // $this->facebook->destroySession();
+            // $_SESSION['do_not_auto_login']=true;
+            // Make sure you destory website session as well.
+    $this->session->sess_destroy();
+    redirect('/');
   }
 
   // takes in @id, displays individual profile
@@ -146,4 +154,3 @@ class Users extends CI_Controller {
   }
 
 }
-?>

@@ -11,7 +11,45 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>   
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> 
+
+    <!-- home styling -->
+    <style>
+  #bg {
+    background: url('http://i.imgur.com/HrVOqDY.jpg') no-repeat center fixed;
+    background-size:100% auto;
+      /*background-size: cover;*/
+  }
+  #city_search {
+    border: 2px solid #dadada;
+    border-radius: 7px;
+  }
+
+  #city_search:focus {
+    outline: none;
+    border-color: #0f3d00;
+    box-shadow: 0 0 10px #60b263;
+  }
+  #city_border div{
+    opacity: 0.7;
+    background-color: #030503;
+    position: relative;
+    left: 200px;
+    top: 200px;
+    width: 700px;
+    height: 150px;
+    border-radius: 10px;
+  }
+
+  #login_button {
+    background: url("<?= base_url('/assets/images/login_button.png') ?>");
+    background-size: cover;
+    width: 137px;
+    margin-top: 7px;
+  }
+
+</style>  
+ <!-- home styling -->
 
 </head>
 <body>
@@ -19,20 +57,71 @@
 <script>
  $(document).ready(function(){
 
+
   logInWithFacebook = function() {
     FB.login(function(response) {
       if (response.authResponse) {
         // Now you can redirect the user or do an AJAX request to
         // a PHP script that grabs the signed request from the cookie.
         $.get("/login", function(res){
-          $('.log').html(res);
+          window.location.replace('/users/show_profile');
         });
       } else {
         alert('User cancelled login or did not fully authorize.');
       }
     });
-    return false;
   };
+ // logOutWithFacebook = function() {
+ //        console.log(FB.getAuthResponse());
+ //    var token = "<?= $this->session->userdata('fb_access_token');?>";
+  //   FB.logout(function(response) {
+  //         // Logout from the site and facebook
+  //     $(location).attr('href', 'http://localhost:8888');    
+  //    });
+  // });
+
+window.onload=function()
+{
+    // initialize the library with your Facebook API key
+    // FB.init({ apiKey: '598326020324395' });
+
+    //Fetch the status so that we can log out.
+    //You must have the login status before you can logout,
+    //and if you authenticated via oAuth (server side), this is necessary.
+    //If you logged in via the JavaScript SDK, you can simply call FB.logout()
+    //once the login status is fetched, call handleSessionResponse
+    FB.getLoginStatus(logOutWithFacebook);
+}
+
+
+$('#fb_logout').click(function() {
+    logOutWithFacebook();
+  });
+//handle a session response from any of the auth related calls
+function logOutWithFacebook() {
+    //if we dont have a session (which means the user has been logged out, redirect the user)
+
+    FB.getLoginStatus(function(response) {
+      console.log(response);
+      if (response && response.status === "connected") {
+        
+        FB.logout(function(response) {
+           $.get('logout');
+          if (response.status != "connected") {
+
+             window.location = "/";
+            return;
+          }
+        });
+      }
+    });
+    
+
+    //if we do have a non-null response.session, call FB.logout(),
+    //the JS method will log the user out of Facebook and remove any authorization cookies
+    // FB.logout(logOutWithFacebook);
+}
+
   window.fbAsyncInit = function() {
     FB.init({
       appId: '598326020324395',
@@ -63,8 +152,7 @@
             $("body").css("padding-top", "0px");
         }
     });
-
-
+      
  });
 
 
@@ -86,10 +174,17 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right nav-pills ">
+        <?php 
+          if($this->session->userdata( 'fb_access_token' )){
+?>
           <li><a href="/profile">Profile</a></li>
+          <?php } ?>
           <li><a href="/all">Events</a></li>
-          <li><a href="/signin">Signin</a></li>
-          <li><a href="/logout">Logout</a></li>
+                 <?php 
+          if($this->session->userdata( 'fb_access_token' )){
+?>
+          <li><a id="fb_logout" class="btn" href="#">Logout</a></li>
+          <?php } ?>
           <li><a id="login_button" class="btn" href="#" onClick="logInWithFacebook()"></a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -106,6 +201,4 @@
     </div><!-- /.container-fluid -->
   </nav>
 
-
-<div class="log"> </div>
 

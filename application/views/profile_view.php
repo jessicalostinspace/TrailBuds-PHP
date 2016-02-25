@@ -1,4 +1,9 @@
-<?php require_once('header.php'); ?>
+<?php require_once('header.php'); 
+
+	if(!$this->session->userdata( 'fb_access_token' )){
+		redirect("/");
+	}
+?>
 
 
 <style type="text/css">

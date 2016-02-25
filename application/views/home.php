@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +64,6 @@
         // a PHP script that grabs the signed request from the cookie.
         $.get("/login", function(res){
           window.location.replace('/users/show_profile/');
-          console.log(res);
         });
       } else {
         alert('User cancelled login or did not fully authorize.');
@@ -126,6 +126,12 @@
 
 <div class="log" style="background-color: white;"> </div>
 
+=======
+<?php
+require_once('header.php');
+?>
+<div id="bg">
+>>>>>>> 727a9d1b03c478f0f9ec1e155c197735802eeada
 
 <div class="container">
 	<div id="city_border" class="container">
@@ -135,7 +141,7 @@
 		</div>
 	</div>
 </div>
-
+</div>
 <?php
 require_once('footer.php');
 ?>
