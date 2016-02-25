@@ -63,6 +63,7 @@ $route['show/(:any)'] = 'events/show/$1';
 // $route['default_controller'] = 'events';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+$route['route'] = 'events/google';
 
 
 

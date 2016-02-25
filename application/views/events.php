@@ -23,14 +23,25 @@
   </style>
 </head>
 <body>
-	<?php $id=1 ?>
-	<a href=<?= "'/show/" . $id . "'" ?>>Show</a>
+	
 
 
 <div class="container">
   <!-- Trigger the modal with a button -->
+  <div id='apricot' class='container-fluid'>
+    <div id='avocado' class='container'>
+	<h5>Filter By:</h5>
+	<div class="btn-group">
+	<button type="button" id='btn0' class="btn btn-info">Closest to You</button>
+    <button type="button" id='btn1' class="btn btn-primary">Soonest</button>
+    <button type="button" id='btn2' class="btn btn-danger">Latest</button>
+    <button type="button" id='btn3' class="btn btn-info">Least Spots Remaining</button>
+    <button type="button" id='btn4' class="btn btn-warning">Most Spots Remaining</button>
+	</div>
+  </div>
  <div id='peach'>
-  <button type="button" class="btn btn-default btn-lg" id="myBtn">Create An Event</button>
+  <button type="button" class="btn btn-default btn-lg" id="myBtn"><span style='color:white' class="glyphicon glyphicon-plus"></span>  Create An Event</button>
+</div>
 </div>
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
@@ -60,13 +71,28 @@
             <div class="form-group">
               <label for="psw1"></span>Description</label>
               <input name='description' type="text" class="form-control" id="psw1" placeholder="Enter a description">
+               <?php
+				if ($this->session->flashdata('description_error')) {
+					echo "<div class='red'><p>" . $this->session->flashdata('description_error') . "</p></div>";
+				}
+			?>
             </div>
             <div class="form-group">
               <label for="psw2"></span>*Hike Location</label>
-              <input name='hike_location' type="text" class="form-control" id="psw2" placeholder="Hike Location">
+              <input name='hike_location' type="text" class="form-control" id="autocomplete" onFocus='geolocate()' placeholder="Hike Location">
+              <div id='starfruit'></div>
             <?php
 				if ($this->session->flashdata('hike_location_error')) {
 					echo "<div class='red'><p>" . $this->session->flashdata('hike_location_error') . "</p></div>";
+				}
+			?>
+            </div>
+            <div class="form-group">
+              <label for="psw6">*Meeting Location</label>
+              <input name='departure_location' type="text" class="form-control" id="psw6" placeholder="Meeting Address">
+             <?php
+				if ($this->session->flashdata('departure_location_error')) {
+					echo "<div class='red'><p>" . $this->session->flashdata('departure_location_error') . "</p></div>";
 				}
 			?>
             </div>
@@ -92,15 +118,7 @@
               <label for="psw5">Elevation Gain</label>
               <input name='elevation' type="text" class="form-control" id="psw5" placeholder="Feet">
             </div>
-            <div class="form-group">
-              <label for="psw6">*Meeting Location</label>
-              <input name='departure_location' type="text" class="form-control" id="psw6" placeholder="Meeting Address">
-             <?php
-				if ($this->session->flashdata('departure_location_error')) {
-					echo "<div class='red'><p>" . $this->session->flashdata('departure_location_error') . "</p></div>";
-				}
-			?>
-            </div>
+            
              <div class="form-group">
               <label for="psw7">Can You Drive?</label></br>
 		        <div class="col-sm-9">
@@ -139,16 +157,21 @@
          
 
         </div>
-      </div>
       
+      </div>
     </div>
   </div> 
 </div>
+
+
 <div id='orange' class='container'>
 </div>
- 
+
+
+
 <script type='text/javascript'>
 $(document).ready(function(){
+	$('#image_container').css('height', $(window).height()/2);
 	$.get('/events/display_all_events', function(res){
 		$('#orange').html(res);
 	});
@@ -157,14 +180,136 @@ $(document).ready(function(){
 		$("#myModal").modal();
 	<?php }
 	?>
+	$('#myBtn').hover(
+       function () {
+          $(this).css({"background-color":"#00AEFF"});
+       }, 
+		
+       function () {
+          $(this).css({"background-color":"#0173C7"});
+       }
+    );
     $("#myBtn").click(function(){
         $("#myModal").modal();
     });
+    $('#btn0').click(function(){
+    	$.get('/events/display_soonest', function(res){
+    		$('#orange').html(res);
+    		$('h4').css({"background-color":"#49B64E"});
+    	});
+    });
+    $('#btn1').click(function(){
+    	$.get('/events/display_soonest', function(res){
+    		$('#orange').html(res);
+    		$('h4').css({"background-color":"#0173C7"});
+    	});
+    });
+    $('#btn2').click(function(){
+    	$.get('/events/display_latest', function(res){
+    		$('#orange').html(res);
+    		$('h4').css({"background-color":"#00AEFF"});
+    	});
+    });
+    $('#btn3').click(function(){
+    	$.get('/events/display_spots_least', function(res){
+    		$('#orange').html(res);
+    		$('h4').css({"background-color":"#005200"});
+    	});
+    });
+     $('#btn4').click(function(){
+    	$.get('/events/display_spots_most', function(res){
+    		$('#orange').html(res);
+    		$('h4').css({"background-color":"#222222"});
+    	});
+    });
+     $('#autocomplete').keyup(function(){
+     	var info= $(this).val();
+     	$.post('/events/google', info, function(res){
+     		console.log(info);
+     		console.log(res.predictions[0].description);
 
+     		var one=res.predictions[0].description;
+     		var new_html="<p id='nectarine'>" + one + "</p>";
+     		
+     		$('#starfruit').html(new_html);
+     	});
+     });
    
-});
-</script>
 
+ });
+</script>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApbO-TW6-gkolVfdL1uKgqDCP2rC3fg2A&libraries=places">
+    </script>
+    <script>
+      // This example displays an address form, using the autocomplete feature
+      // of the Google Places API to help users fill in the information.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      var placeSearch, autocomplete;
+      var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+      };
+
+      function initAutocomplete() {
+        // Create the autocomplete object, restricting the search to geographical
+        // location types.
+        autocomplete = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+            {types: ['geocode']});
+
+        // When the user selects an address from the dropdown, populate the address
+        // fields in the form.
+        autocomplete.addListener('place_changed', fillInAddress);
+      }
+
+      function fillInAddress() {
+        // Get the place details from the autocomplete object.
+        var place = autocomplete.getPlace();
+
+        for (var component in componentForm) {
+          document.getElementById(component).value = '';
+          document.getElementById(component).disabled = false;
+        }
+
+        // Get each component of the address from the place details
+        // and fill the corresponding field on the form.
+        for (var i = 0; i < place.address_components.length; i++) {
+          var addressType = place.address_components[i].types[0];
+          if (componentForm[addressType]) {
+            var val = place.address_components[i][componentForm[addressType]];
+            document.getElementById(addressType).value = val;
+          }
+        }
+      }
+
+      // Bias the autocomplete object to the user's geographical location,
+      // as supplied by the browser's 'navigator.geolocation' object.
+      function geolocate() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var geolocation = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            var circle = new google.maps.Circle({
+              center: geolocation,
+              radius: position.coords.accuracy
+            });
+            autocomplete.setBounds(circle.getBounds());
+          });
+        }
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApbO-TW6-gkolVfdL1uKgqDCP2rC3fg2A&signed_in=true&libraries=places&callback=initAutocomplete"
+        async defer></script>
 </body>
 </html>
 <style type="text/css">
@@ -181,27 +326,107 @@ $(document).ready(function(){
 .red {
 	color: red;
 }
-.table-bordered{
-	margin:2% auto;
-	background-color: white;
-}
-#peach{
 
-	margin: auto;
+#peach{
+	margin-left: 21%;
+	display: inline-block;
+	width: 16%;
+	vertical-align: bottom;
+	
 }
 #myBtn{
-	width:15%;
-	margin-left: 40%;
 	color:white;
-	background: url('http://i.imgur.com/6oIQo8M.jpg');
+	background-color: #0173C7;
+	
 }
 
-
-body {
-    /*background: url('http://i.imgur.com/HrVOqDY.jpg') no-repeat center fixed;
-    background-size:100% auto;
-      /*background-size: cover;*/
+#nectarine{
+	font-weight: bold;
+	display: inline-block;
+	vertical-align: top;
 }
+
+#avocado{
+	display: inline-block;
+	vertical-align: bottom;
+	width: 60%;
+}
+
+.thumbnail {
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 5%;
+	padding: 4%;
+	border:1px solid grey;
+	border-radius: 20px;
+	padding-bottom: 2%;
+
+}
+.tree{
+	margin-bottom: -5%;
+	border-radius: 10px;
+	
+}
+.caption {
+	padding: 0px;
+	height: 10em;
+	margin-bottom: -5%;
+	overflow: scroll;
+	
+}
+.coconut {
+	overflow: scroll;
+	height: 10em;
+	border-top: 1px solid #00AEFF;
+	border-bottom: 1px solid #00AEFF;
+	margin-bottom: 2%;
+	
+}
+h4 {
+	background-color: #49B64E;
+}
+*{
+	color: #222222;
+}
+body{
+	background: url('http://i.imgur.com/hkqRlDm.png');
+  
+}
+#btn0{
+	background-color: #49B64E;
+	border: transparent;
+
+}
+#btn1{
+	background-color: #0173C7;
+	border: transparent;
+}
+#btn2{
+	background-color: #00AEFF;
+	border: transparent;
+}
+#btn3{
+	background-color: #005200;
+	border: transparent;
+}
+#btn4{
+	background-color: #222222;
+	border: transparent;
+}
+#btn5{
+	background-color: #0173C7;
+	color: white;
+	margin-top: 3%;
+}
+#apricot{
+  width: 113%;
+  background-color: white;
+  border-bottom: 1px solid gray;
+  height: 6em;
+  margin-left: -6.1%;
+  margin-top: -2%;
+
+
 
 </style>
 

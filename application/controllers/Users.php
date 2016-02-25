@@ -87,6 +87,7 @@ class Users extends CI_Controller {
 
     // check if user exists in the database
     $found_user = $this->User->find($user['id']);
+    $this->session->set_userdata('user_id', $found_user['id']);
     $current_user = array(
                           'id' => $user['id'],
                           'name' => $user['name'],

@@ -28,6 +28,12 @@ class Events extends CI_Controller {
    $departure_date=$this->input->post('departure_date');
    $created_at=date('Y-m-d H:i:s');
    $updated_at=date('Y-m-d H:i:s');
+   $this->load->model('User');
+   $row=$this->User->find($this->session->userdata('id'));
+   
+
+   $creator_id=$row['id'];
+  
    $table=array(
     'name'=> $name,
     'description'=> $description,
@@ -40,10 +46,12 @@ class Events extends CI_Controller {
     'attendees'=> $attendees,
     'departure_date'=> $departure_date,
     'created_at'=> $created_at,
-    'updated_at'=> $updated_at
+    'updated_at'=> $updated_at,
+    'creator_id'=> $creator_id
     );
   $this->load->library("form_validation");
-  $this->form_validation->set_rules('name', 'Name', 'trim|required');
+  $this->form_validation->set_rules('name', 'Name', 'trim|required|max_length[25]');
+  $this->form_validation->set_rules('description', 'Description', 'max_length[75]');
   $this->form_validation->set_rules('hike_location', 'Hike Location', 'trim|required');
   $this->form_validation->set_rules('distance', 'Distance', 'trim|required');
   $this->form_validation->set_rules('duration', 'Duration', 'trim|required');
@@ -52,6 +60,7 @@ class Events extends CI_Controller {
   if ($this->form_validation->run() === FALSE) {
     
       $this->session->set_flashdata('name_error', form_error('name'));
+      $this->session->set_flashdata('description_error', form_error('description'));
       $this->session->set_flashdata('hike_location_error', form_error('hike_location'));
       $this->session->set_flashdata('distance_error', form_error('distance'));
       $this->session->set_flashdata('duration_error', form_error('duration'));
@@ -82,12 +91,51 @@ class Events extends CI_Controller {
     $this->load->view('partials/events', $table);
     
   }
+  public function display_soonest(){
+
+    $this->load->model('Event');
+    $table['events']= $this->Event->display_soonest();
+    $this->load->view('partials/soonest', $table);
+    
+  }
+  public function display_latest(){
+
+    $this->load->model('Event');
+    $table['events']= $this->Event->display_latest();
+    $this->load->view('partials/latest', $table);
+    
+  }
+  public function display_spots_most(){
+
+    $this->load->model('Event');
+    $table['events']= $this->Event->display_spots_most();
+    $this->load->view('partials/spots_most', $table);
+    
+  }
+   public function display_spots_least(){
+
+    $this->load->model('Event');
+    $table['events']= $this->Event->display_spots_least();
+    $this->load->view('partials/spots_least', $table);
+    
+  }
 
   // needs to take in parameter for event
   public function show_events()
   {
 
     // $this->load->view('single_event');
+  }
+  public function google(){
+    $array=$this->input->post();
+    foreach ($array as $key => $value) {
+      $value=$key;
+    }
+    
+    $html = file_get_contents("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=".urlencode($value)."&key=AIzaSyApbO-TW6-gkolVfdL1uKgqDCP2rC3fg2A");
+    $this->output
+       ->set_content_type('application/json')
+       ->set_output($html);
   }
 
 }
