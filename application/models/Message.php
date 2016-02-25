@@ -21,7 +21,7 @@ class Message extends CI_Model
   //this id is session id to display on personal messages page
   public function getAllPersonal($id)
   {
-  	$query = "SELECT messages.content, sender.first_name, sender.last_name, messages.updated_at
+  	$query = "SELECT messages.content, sender.id, sender.first_name, sender.last_name, messages.updated_at
   			FROM messages 
   			LEFT JOIN users AS sender
   			ON messages.sender_id = sender.id

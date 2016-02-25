@@ -154,6 +154,11 @@
     .forest{
     	color: #015604;
     }
+    .ajaxmsg{
+		position: relative;
+	    right: 36px;
+	    bottom: 114px;
+    }
 </style>
 
 
@@ -299,10 +304,10 @@ $(document).ready(function(){
 			    <p></p>
 			    <p><?= $user['description'] ?></p>
 		 	</div>
+<div id="replaced">		    
 		    <div class="col-md-1">
 		    	<a class="message btn btn-success btn-xs" href="#"><h5>Message</h5></a>
 		    </div>
-<div id="replaced">		    
 			<div class="future_events borders col-md-5">
 				<h2 class="forest">Upcoming Hikes</h2>
 
@@ -342,7 +347,6 @@ $(document).ready(function(){
 
 		    </div>
 		</div>
-</div>			    
 	 	<div class="row">
 	 		<div class="borders col-md-10">
 		 		<label class="control-label"><h2>Snap a cool pic on the trail? Upload it!</h2></label>
@@ -350,6 +354,7 @@ $(document).ready(function(){
 				<p></p>
 	 		</div>
 	 	</div>
+</div>			    
 	</div>
 
 <div class="container">

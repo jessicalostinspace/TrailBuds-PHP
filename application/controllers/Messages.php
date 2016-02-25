@@ -23,7 +23,6 @@ class Messages extends CI_Controller {
   	//This should be users auto incremented id
   	$sender_id = $this->session->userdata('id');
 
-  	
   	$receiver_id = $this->session->userdata('id');
   	//NEED TO FIGURE OUT HOW TO GRAB THIS
   	// $receiver_id = $this->input->post('receiver_id');

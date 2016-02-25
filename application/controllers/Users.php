@@ -108,13 +108,16 @@ class Users extends CI_Controller {
     if($found_user)
     {
       $this->session->set_userdata($current_user);
+      echo $user_id['id'];
     }
     // if not found create user and set data to session
     else
     {
       $this->User->create($user);
       $this->session->set_userdata($current_user);
+      echo $user_id['id'];
     }
+
   }
 
   public function logout()
@@ -131,7 +134,7 @@ class Users extends CI_Controller {
   }
 
   // takes in @id, displays individual profile
-  public function show_profile()
+  public function show_profile($id)
   {
     // WE SHOULD CHANGE QUERY AND SEND IN USER ID FROM SESSION
     //INSTEAD OF FB ID
