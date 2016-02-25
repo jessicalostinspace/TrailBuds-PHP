@@ -15,11 +15,7 @@
 
     <!-- home styling -->
     <style>
-  #bg {
-    background: url('http://i.imgur.com/HrVOqDY.jpg') no-repeat center fixed;
-    background-size:100% auto;
-      /*background-size: cover;*/
-  }
+
   #city_search {
     border: 2px solid #dadada;
     border-radius: 7px;
@@ -39,6 +35,7 @@
     width: 700px;
     height: 150px;
     border-radius: 10px;
+    /*z-index:3;*/
   }
 
   #login_button {
