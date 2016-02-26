@@ -12,7 +12,7 @@
 
 <div class="container">
   <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="updateModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -45,13 +45,13 @@
 </div>
 <script>
 $(document).ready(function(){
-    $(".edit").click(function(){
+    $(".message").click(function(){
     	console.log("test");
-        $("#myModal").modal();
+        $("#myMsgModal").modal();
     });
 
-    $(".message").click(function(){
-	    $("#myMsgModal").modal();
+    $(".edit").click(function(){
+	    $("#updateModal").modal();
     });
 
 	$('.newMsg').click(function(){
@@ -65,6 +65,11 @@ $(document).ready(function(){
 		    $("#privateMsgModal").modal();
     	});
     });	
+
+    $(".uploadimg").click(function() {
+   		$(this).attr('width', '400');
+    	$(this).attr('height', '800');
+});
 
     // $('#newMsg').submit(function(){
 
@@ -115,7 +120,7 @@ $(document).ready(function(){
 
 				</div>
 
-				<img class="profile_picture .img-rounded" src="<?=$user['picture_url']?>" alt="Profile picture" style="width:120px; height:120px;">
+				<img class="profile_picture .img-rounded" src="http://graph.facebook.com/<?= $user['facebook_id']?>/picture?type=large" alt="Profile picture" style="width:160px; height:160px;">
 				<!-- http://graph.facebook.com/{ID}/picture?type=large -->
 
 				<h1 class="username_display"><?= $user['first_name']." ".$user['last_name']?></h1>
@@ -143,14 +148,23 @@ $(document).ready(function(){
 			<div class="future_events borders col-sm-5">
 				<h2 class="forest">Upcoming Hikes</h2>
 
-				<h4><a href="#">No, motherfucker</a></h4>
-				<p>Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a glass motherfuckin' house, fuckin' up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, 'cause I'll kill the motherfucker, know what I'm sayin'? </p>
+				<h4><a href="#">Gothic Basin jaunt this Saturday</a></h4>
+				<p><b>Hike Length:</b> 9.2 mi</p>
+				<p><b>Elevation Gain:</b> 2840 ft.</p>
+				<p><b>Location:</b> North Cascades</p>
 
-				<h4><a href="#">No, motherfucker</a></h4>
-				<p>Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a glass motherfuckin' house, fuckin' up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, 'cause I'll kill the motherfucker, know what I'm sayin'? </p>
 
-				<h4><a href="#">No, motherfucker</a></h4>
-				<p>Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a glass motherfuckin' house, fuckin' up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, 'cause I'll kill the motherfucker, know what I'm sayin'? </p>
+				<h4><a href="#">Olympic National Park 5 day backpacking</a></h4>
+				<p><b>Hike Length:</b> 13.5 mi</p>
+				<p><b>Elevation Gain:</b> 500 ft.</p>
+				<p><b>Location:</b> Olympic Peninsula</p>
+
+
+				<h4><a href="#">Paradise at Mt. Rainier Snowshoe trek</a></h4>
+				<p><b>Hike Length:</b> 5.0 mi</p>
+				<p><b>Elevation Gain:</b> 1000 ft.</p>
+				<p><b>Location:</b> Mount Rainier</p>
+
 		    </div>
 		    <div class="col-sm-1">
 		    	
@@ -174,20 +188,35 @@ $(document).ready(function(){
 	 		<div class="past_events borders col-sm-5">
 				<h2 class="forest">Past Hikes</h2>
 
-				<h4><a href="#">Yes, motherfucker</a></h4>
-				<p>Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a glass motherfuckin' house, fuckin' up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, 'cause I'll kill the motherfucker, know what I'm sayin'? </p>
+				<h4><a href="#">Mt. Ellinor</a></h4>
+				<p><b>Rating:</b> <img src="/assets/images/stars.png" style="width:100px;height:20px;"></p>
+				<p><b>Hike Length:</b> 9.2 mi</p>
+				<p><b>Elevation Gain:</b> 2840 ft.</p>
+				<p><b>Location:</b> Olympic Peninsula</p>
+
 
 		    </div>
 		</div>
 	 	<div class="row">
-	 		<div class="borders col-sm-12">
+	 		<div class="borders col-sm-10">
 		 		<label class="control-label"><h2>Snap a cool pic on the trail? Upload it!</h2></label>
 				<input id="input-1" type="file" class="file">
 				<p></p>
+				<img style="display:inline-block;width:200px;height:228px;margin:10px;" class="uploadimg" src="/assets/images/gothicpeak.jpg" alt="Gothic Peak" >
+				<img style="display:inline-block;width:200px;height:228px;margin:10px;" class="uploadimg" src="/assets/images/gothicpeakfriends.jpg" alt="Gothic Peak with Friends">
+				<img style="display:inline-block;width:200px;height:228px;margin:10px;" class="uploadimg" src="/assets/images/TetonsJess.jpg" alt="Grand Tetons">
+				<img style="display:inline-block;width:200px;height:228px;margin:10px;" class="uploadimg" src="/assets/images/YosemiteGrandPrismatic.jpg" alt="Grand Prismatic">
+				<p></p>
 	 		</div>
 	 	</div>
+	 	<div class="row">
+	 		<div class="col-sm-12" style="height:100px;"></div>
+	 	</div>	
+	 	<p></p><p></p>
 </div>			    
 	</div>
+
+
 
 <div class="container">
   <!-- Modal -->
