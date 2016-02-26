@@ -445,7 +445,7 @@ body{
   border-bottom: 1px solid lightgrey;
   height: 5em;
   margin-top: -1.5%;
-  margin-left: -5%;
+  margin-left: -10%;
 
 
   position: fixed;
