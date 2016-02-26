@@ -26,6 +26,7 @@ class Events extends CI_Controller {
    $drive=$this->input->post('drive');
    $attendees=$this->input->post('attendees');
    $departure_date=$this->input->post('departure_date');
+   $image_url=$this->input->post('image_url');
    $created_at=date('Y-m-d H:i:s');
    $updated_at=date('Y-m-d H:i:s');
    $this->load->model('User');
@@ -47,16 +48,18 @@ class Events extends CI_Controller {
     'departure_date'=> $departure_date,
     'created_at'=> $created_at,
     'updated_at'=> $updated_at,
-    'creator_id'=> $creator_id
+    'creator_id'=> $creator_id,
+    'image_url'=>$image_url
     );
   $this->load->library("form_validation");
-  $this->form_validation->set_rules('name', 'Name', 'trim|required|max_length[25]');
-  $this->form_validation->set_rules('description', 'Description', 'max_length[75]');
+  $this->form_validation->set_rules('name', 'Name', 'trim|required|max_length[50]');
+  $this->form_validation->set_rules('description', 'Description', 'max_length[150]');
   $this->form_validation->set_rules('hike_location', 'Hike Location', 'trim|required');
   $this->form_validation->set_rules('distance', 'Distance', 'trim|required');
   $this->form_validation->set_rules('duration', 'Duration', 'trim|required');
   $this->form_validation->set_rules('departure_location', 'Meeting Location', 'trim|required');
   $this->form_validation->set_rules('departure_date', 'Departure Date', 'trim|required');
+  $this->form_validation->set_rules('image_url', 'Image URL', 'trim|required|max_length[350]');
   if ($this->form_validation->run() === FALSE) {
 
       $this->session->set_flashdata('name_error', form_error('name'));
@@ -66,6 +69,7 @@ class Events extends CI_Controller {
       $this->session->set_flashdata('duration_error', form_error('duration'));
       $this->session->set_flashdata('departure_location_error', form_error('departure_location'));
       $this->session->set_flashdata('departure_date_error', form_error('departure_date'));
+      $this->session->set_flashdata('image_url_error', form_error('image_url'));
       redirect('/events/show_all');
     }
   else {

@@ -22,6 +22,7 @@ require_once('header.php');
   		  <input id="autocomplete" type="search" class="form-control input-lg" id="city" placeholder="Enter your city">
       </form>
   		</div>
+      
   	</div>
   </div>
 

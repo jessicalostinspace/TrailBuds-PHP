@@ -5,8 +5,9 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   
  
@@ -29,16 +30,22 @@
 <div class="container">
   <!-- Trigger the modal with a button -->
   <div id='apricot' class='container-fluid'>
-    <div id='avocado' class='container'>
-	<h5>Filter By:</h5>
-	<div class="btn-group">
-	<button type="button" id='btn0' class="btn btn-info">Closest to You</button>
-    <button type="button" id='btn1' class="btn btn-primary">Soonest</button>
-    <button type="button" id='btn2' class="btn btn-danger">Latest</button>
-    <button type="button" id='btn3' class="btn btn-info">Least Spots Remaining</button>
-    <button type="button" id='btn4' class="btn btn-warning">Most Spots Remaining</button>
-	</div>
-  </div>
+  <div id='avocado' class="container">
+     <div class="dropdown">
+        <button class="btn btn-default btn-lg dropdown-toggle" id='filter_btn' type="button" data-toggle="dropdown">Filter By
+        <span style='color:white' class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li class="dropdown-header"><span class='glyphicon glyphicon-time green_glyph'> </span>  Departure Date</li>
+          <li><a href="#" id='btn1' ><span class='glyphicon glyphicon-arrow-up green_glyph'></span>  Soonest</a></li>
+          <li><a href="#" id='btn2' ><span class='glyphicon glyphicon-arrow-down green_glyph'></span>  Latest</a></li>
+          <li class="divider"></li>
+          <li class="dropdown-header"><span class='glyphicon glyphicon-user green_glyph'></span>  Spots Remaining</li>
+          <li><a href="#" id='btn3' ><span class='glyphicon glyphicon-arrow-up green_glyph'></span>  Most</a></li>
+          <li><a href="#" id='btn4' ><span class='glyphicon glyphicon-arrow-down green_glyph'></span>  Least</a></li>
+        </ul>
+      </div>
+    </div>
+	
  <div id='peach'>
   <button type="button" class="btn btn-default btn-lg" id="myBtn"><span style='color:white' class="glyphicon glyphicon-plus"></span>  Create An Event</button>
 </div>
@@ -51,7 +58,7 @@
       <div id='mymodal' class="modal-content">
         <div class="modal-header" style="padding:35px 50px;">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4><span class="glyphicon glyphicon-pencil"></span> Create Your Event</h4>
+          <h2><span style='color:white' class="glyphicon glyphicon-pencil"></span> Create Your Event</h2>
           
           
         </div>
@@ -145,14 +152,23 @@
 				}
 			?>
             </div>
-           
+            <div class="form-group">
+              <label for="psw10">*Provide an Imgur.com image URL (needs .jpg or .png format)</label>
+              <input name='image_url' type="text" class="form-control" id="psw10" >
+              <div><label id='pear'>Example: http://imgur.com/gallery/Z0siJAG</label></div>
+              <?php
+                if ($this->session->flashdata('departure_date_error')) {
+                  echo "<div class='red'><p>" . $this->session->flashdata('image_url_error') . "</p></div>";
+                }
+              ?>
+            </div>
       
-              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-check"></span>Create Event</button>
+              <button type="submit" id='button_submit_event' class="btn btn-success btn-block"><span style='color:white' class="glyphicon glyphicon-check"></span>Create Event</button>
           </form>
         </div>
         <div class="modal-footer">
         	
-          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <button type="submit" id='button_cancel_event' class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span style='color:white' class="glyphicon glyphicon-remove"></span> Cancel</button>
           <p>Not a member? <a href="#">Sign Up</a></p>
          
 
@@ -171,6 +187,7 @@
 
 <script type='text/javascript'>
 $(document).ready(function(){
+  $('.dropdown-toggle').dropdown()
 	$('#image_container').css('height', $(window).height()/2);
 	$.get('/events/display_all_events', function(res){
 		$('#orange').html(res);
@@ -182,51 +199,52 @@ $(document).ready(function(){
 	?>
 	$('#myBtn').hover(
        function () {
-          $(this).css({"background-color":"#00AEFF"});
+          $(this).css({"background-color":"#FF7E17"});
        }, 
 		
        function () {
-          $(this).css({"background-color":"#0173C7"});
+          $(this).css({"background-color":"#005200"});
+       }
+    );
+  $('#filter_btn').hover(
+       function () {
+          $(this).css({"background-color":"#FF7E17"});
+       }, 
+    
+       function () {
+          $(this).css({"background-color":"#005200"});
        }
     );
     $("#myBtn").click(function(){
         $("#myModal").modal();
     });
-    $('#btn0').click(function(){
-    	$.get('/events/display_soonest', function(res){
-    		$('#orange').html(res);
-    		$('h4').css({"background-color":"#49B64E"});
-    	});
+    $("#btn-md").click(function(){
+        console.log('hello');
     });
+    
     $('#btn1').click(function(){
     	$.get('/events/display_soonest', function(res){
     		$('#orange').html(res);
-    		$('h4').css({"background-color":"#0173C7"});
     	});
     });
     $('#btn2').click(function(){
     	$.get('/events/display_latest', function(res){
     		$('#orange').html(res);
-    		$('h4').css({"background-color":"#00AEFF"});
     	});
     });
     $('#btn3').click(function(){
     	$.get('/events/display_spots_least', function(res){
     		$('#orange').html(res);
-    		$('h4').css({"background-color":"#005200"});
     	});
     });
      $('#btn4').click(function(){
     	$.get('/events/display_spots_most', function(res){
     		$('#orange').html(res);
-    		$('h4').css({"background-color":"#222222"});
     	});
     });
      $('#autocomplete').keyup(function(){
      	var info= $(this).val();
      	$.post('/events/google', info, function(res){
-     		console.log(info);
-     		console.log(res.predictions[0].description);
 
      		var one=res.predictions[0].description;
      		var new_html="<p id='nectarine'>" + one + "</p>";
@@ -315,7 +333,7 @@ $(document).ready(function(){
 <style type="text/css">
 
 #banana{
-	color:red;
+	color:#FF7E17;
 	margin-top: -3%;
 	font-size: 12px;
 	margin-bottom: 2%;
@@ -323,21 +341,26 @@ $(document).ready(function(){
 #uno {
 	margin-top: 2%;
 }
-.red {
-	color: red;
-}
 
 #peach{
 	margin-left: 10%;
 	display: inline-block;
 	width: 16%;
 	vertical-align: bottom;
+  margin-top: 1.2%;
 	
+}
+.modal-header{
+  background-color:#005200;
 }
 #myBtn{
 	color:white;
-	background-color: #0173C7;
-	
+	background-color:#005200;
+  border: transparent;	
+}
+#mymodal{
+  height:40em;
+  overflow-y:scroll; 
 }
 
 #nectarine{
@@ -349,37 +372,39 @@ $(document).ready(function(){
 #avocado{
 	display: inline-block;
 	vertical-align: bottom;
-	width: 60%;
+	width: 55%;
+  margin-left: 3%;
 }
 
 .thumbnail {
-	display: inline-block;
-	vertical-align: top;
-	margin-top: 5%;
-	padding: 4%;
-	border:1px solid grey;
-	padding-bottom: 2%;
+  display: inline-block;
+  vertical-align: top;
+  border: 1px solid lightgrey;
+  margin-top: 5%;
+  padding: 4%;
+  padding-bottom: 2%;
+  height: 31em;
+  width: 100%;
 
 }
 .tree{
-	margin-bottom: -5%;
-	border-radius: 10px;
-	
+  height: 10em;
+  border-radius: 10px;
+  margin-left: -12%;
+  width: 120%;
 }
 .caption {
-	padding: 0px;
-	height: 10em;
-	margin-bottom: -5%;
-	overflow: scroll;
-	
+
+  height: 10em;
+  margin-bottom: -5%;
+  margin-top: -1%;
+  overflow: scroll;
+  width: 28%;
+  
 }
 .coconut {
-	overflow: scroll;
-	height: 10em;
-	border-top: 1px solid #00AEFF;
-	border-bottom: 1px solid #00AEFF;
-	margin-bottom: 2%;
-	
+  margin-bottom: 2%;
+  
 }
 h4 {
 	background-color: #49B64E;
@@ -391,48 +416,121 @@ body{
 	background: url('http://i.imgur.com/hkqRlDm.png');
   
 }
-#btn0{
-	background-color: #49B64E;
-	border: transparent;
 
-}
 #btn1{
-	background-color: #0173C7;
-	border: transparent;
+  border-color:#005200; 
+  color: #005200;
 }
 #btn2{
-	background-color: #00AEFF;
-	border: transparent;
+	 border-color:#005200; 
+  color: #005200;
 }
 #btn3{
-	background-color: #005200;
-	border: transparent;
+ border-color:#005200; 
+  color: #005200;
 }
 #btn4{
-	background-color: #222222;
-	border: transparent;
+	 border-color:#005200; 
+  color: #005200;
 }
 #btn5{
-	background-color: #0173C7;
-	color: white;
-	margin-top: 3%;
+  margin-left: 70%;
+  background-color: #005200;
+	border-color:#005200; 
+  color: white;
 }
 #apricot{
-  width: 113%;
+  width: 100%;
   background-color: white;
-  border-bottom: 1px solid gray;
-  height: 6em;
-  margin-left: -6.1%;
-  margin-top: -2%;
-  padding-top: .5%;
+  border-bottom: 1px solid lightgrey;
+  height: 5em;
+  margin-top: -1.5%;
+  margin-left: -5%;
+
+
   position: fixed;
   z-index: 5;
-  padding-left: 5%;
+
 }
 #orange{
   margin-top: 5%;
 }
+#event_image, .caption{
+  display: inline-block;
+  vertical-align: top;
+ 
+}
+#events_top_div {
+  margin-bottom: 5%;
+  padding: 0px;
+}
+#smallbox{
+  width:100%;
 
+}
+#longbox{
+  width:100%;
+}
+#event_image {
+  width: 15%;
+}
+#events_footer_div{
+  height: 3em;
+  width: 100%;
+  margin-top: -2%;
+}
+#pear{
+  font-weight: lighter;
+}
+.event_list_top{
+  display: inline-block;
+  vertical-align: top;
+  width: 22.5%;
+}
+#list_spots{
+  width: 30%;
+}
+.green_tooltip, .green_list{
+  border-color:#005200;
+}
+.tooltip-inner {
+    background-color: #005200;
+}
+
+.tooltip.top .tooltip-arrow {
+    border-top-color: #005200;
+}
+
+.tooltip.right .tooltip-arrow {
+    border-right-color: #005200;
+}
+
+.tooltip.bottom .tooltip-arrow {
+    border-bottom-color: #005200;
+}
+
+.tooltip.left .tooltip-arrow {
+    border-left-color: #005200;
+}
+#button_cancel_event{
+  background-color:#FF7E17;
+  border: transparent;
+}
+#button_submit_event{
+  background-color: #005200;
+  border: transparent;
+}
+#filter_btn{
+  background-color: #005200;
+  color: white;
+  border: transparent;
+}
+.dropdown-header{
+  color: #005200;
+}
+.green_glyph{
+  color:#005200;
+}
 </style>
 
 
