@@ -92,8 +92,15 @@ class Events extends CI_Controller {
   public function display_all_events(){
 
     $this->load->model('Event');
-    $table['events']= $this->Event->display_everything();
-    $this->load->view('partials/events', $table);
+    $events= $this->Event->display_everything();
+
+    $this->load->model('User');
+    $row= $this->User->find_id($this->session->userdata('id'));
+    $origin = $row['location'];
+    $this->load->view('partials/events', array(
+      'events'=> $events,
+      'origin' => $origin
+    ));
 
   }
   public function display_soonest(){
@@ -145,10 +152,10 @@ class Events extends CI_Controller {
        ->set_content_type('application/json')
        ->set_output($html);
   }
-  public function distance($hike_location)
+  public function distance($hike_location, $origin_point)
  {
   
-  $html = file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=Seattle&destinations=' . urlencode($hike_location) . '&mode=driving&language=en-US&key=AIzaSyApbO-TW6-gkolVfdL1uKgqDCP2rC3fg2A');
+  $html = file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins='. urlencode($origin_point) . '&destinations=' . urlencode($hike_location) . '&mode=driving&language=en-US&key=AIzaSyApbO-TW6-gkolVfdL1uKgqDCP2rC3fg2A');
   $this->output
        ->set_content_type('application/json')
        ->set_output($html);

@@ -3,7 +3,7 @@
 
 ?>
 		
-		<div id='special'><h5><?php echo 'Showing Results for Seattle...' ?></h5></div>	
+		<div id='special'><h5><?php echo 'Showing Results for ' . $origin ?></h5></div>	
 		<?php
 
 		foreach ($events as $event) {
@@ -20,10 +20,12 @@
 			unset($location);
 			$location1=str_replace(',', '', $event['hike_location']); 
 			$location=str_replace(' ', '', $location1); 
+			$origin1=str_replace(',', '', $origin);
+			$origin_point=str_replace(' ', '', $origin1); 
 			?>
 
 			$(document).ready(function(){
-				$.get(<?php echo "'/distance/" . $location . "'" ?>, function(res){
+				$.get(<?php echo "'/distance/" . $location ."/" . $origin_point . "'" ?>, function(res){
 					$(<?php echo "'#longbox" . $event['id'] . "'"?>).append("<a href='#' style='height:3em'class='list-group-item green_list'><p><span style='font-weight:bold'>Distance Away: </span>" + res.rows[0].elements[0].distance.text + "</p></a>")
 				}, 'json');
 			});

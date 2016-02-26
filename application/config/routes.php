@@ -55,7 +55,7 @@ $route['login'] = 'users/login';
 $route['register'] = 'users/register';
 $route['logout'] = 'users/logout';
 $route['profile/(:any)'] = 'users/show_profile/$1';
-$route['distance/(:any)']='events/distance/$1';
+$route['distance/(:any)/(:any)']='events/distance/$1/$2';
 
 $route['all'] = 'events/show_all';
 $route['create_event'] = 'events/create';

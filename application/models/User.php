@@ -44,6 +44,7 @@ class User extends CI_Model
 		return $this->db->query($query, array($location, $description, $id));
 	}
 	
+	
 
 	
 
