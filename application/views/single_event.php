@@ -1,5 +1,4 @@
 <?php require_once('header.php'); ?>
-
     <div id="map" style="width: 100%; height: 300px;"></div>
 
     <div class="container wrapper">
@@ -21,16 +20,26 @@
             cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
             proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<?= $event['description'] ?>
           </p>
+          <hr>
+          <form id="event_message_form" action="/messages/create_event_message" method="post">
+            <textarea name="message" class="form-control" rows="7" placeholder="Write a message..."></textarea>
+            <input type="hidden" name="event_id" value="<?= $event['id'] ?>">
+            <input type="hidden" name="receiver_id" value="<?= $event['creator_id'] ?>">
+            <input type="hidden" name="sender_id" value="<?= $current_user_id ?>">
+            <button style="margin: 10px 0px" type="submit"  class="btn btn-success">Post message</button>
+          </form>
+          <div id="event_messages"></div>
+
         </div>
         <div class="sidebar col-sm-4 col-sm-offset-1">
+          <form id="create_attendant" action="/attendees/create/" method="post">
+            <input type="hidden" name="user_id" value="<?= $current_user_id ?>">
+            <input type="hidden" name="event_id" value="<?= $event['id'] ?>">
+            <button type="submit"  class="btn btn-success">I want to go!</button>
+          </form>
           <h4>People already going...</h4>
           <hr>
-          <p></p>
-        </div>
-        <div class="messages col-sm-7">
-          <form action="">
-            <textarea name="message" class="form-control" rows="7" placeholder="Write a message..."></textarea>
-          </form>
+          <div id="attendees"></div>
         </div>
       </div>
     </div>
@@ -50,6 +59,54 @@
 //   var center = new google.maps.LatLng(origin_coordinates['lat'], origin_coordinates['lon']);
 //   return center;
 // }
+
+// get all current attendants of this event and display them in the sidebar
+
+  var attendees_url = '/attendees/show_all/' + <?= $event['id'] ?>;
+  var current_attendants_output = '';
+  $.get(attendees_url, function(res) {
+    for (var i = 0; i < res.length; i++)
+    {
+      current_attendants_output += '<a href=/users/show_profile/' + res[i].id + '>';
+      current_attendants_output += '<img src=' + res[i].picture_url + '>';
+      current_attendants_output += ' ' + res[i].first_name + ' ' + res[i].last_name + '<br><hr>';
+      current_attendants_output += '</a>';
+    }
+    $('#attendees').html(current_attendants_output);
+  }, "json");
+
+// MESSAGES REQUEST
+  var event_messages_url = "/messages/index_html/<?= $event['id'] ?>"
+  $.get(event_messages_url, function(res) {
+    console.log(res);
+    $('#event_messages').html(res);
+  });
+
+  $('#event_message_form').submit(function(){
+    $.post("/messages/create_event_message", $(this).serialize(), function(res) {
+      $('#event_messages').html(res);
+    });
+    return false;
+  });
+
+
+
+// if user presses I want to go button, create them as an attendant of the event
+  // var create_attendant_url = "/create_attendee/<?= $event['id'] . '/' . $current_user_id ?>/";
+  // console.log(create_attendant_url);
+  // $('#create_attendant').submit(function() {
+  //   $.post(create_attendant_url, $(this).serialize(), function(res) {
+  //     console.log(res);
+  //   }, "json");
+  //   return false;
+  // });
+  // console.log(create_attendant_url);
+
+
+
+
+
+
 
 // initialize the map with line between the departure location and the hike location
 function initMap() {

@@ -47,7 +47,22 @@ class Messages extends CI_Controller {
    	$messages['messages'] = $this->Message->getAllPersonal($id);
    	// var_dump($messages); die;
 
-    $this->load->view('/partials/messages', $messages); 	
+    $this->load->view('/partials/messages', $messages);
+  }
+
+  public function index_html($event_id)
+   {
+     $view_data["messages"] = $this->Message->get_all_event_messages($event_id);
+
+     $this->load->view("partials/event_messages", $view_data);
+   }
+
+  public function create_event_message()
+  {
+    $created = $this->Message->create_event_message($this->input->post());
+
+    $view_data["messages"] = $this->Message->get_all_event_messages($this->input->post('event_id'));
+    $this->load->view("partials/event_messages", $view_data);
   }
 }
 ?>

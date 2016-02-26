@@ -22,7 +22,7 @@ class Message extends CI_Model
   public function getAllPersonal($id)
   {
   	$query = "SELECT messages.content, sender.picture_url, sender.id, sender.first_name, sender.last_name, messages.updated_at
-  			FROM messages 
+  			FROM messages
   			LEFT JOIN users AS sender
   			ON messages.sender_id = sender.id
   			LEFT JOIN users AS receiver
@@ -32,6 +32,23 @@ class Message extends CI_Model
   			// var_dump($query);
   			// var_dump($this->db->query($query, array($id))->result_array());die;
   	return $this->db->query($query, array($id))->result_array();
+  }
+
+  // get messages by event
+  public function get_all_event_messages($event_id)
+  {
+    $query = "SELECT * FROM events
+              JOIN messages ON messages.events_id = events.id
+              JOIN users ON messages.sender_id = users.id ORDER BY messages.id DESC";
+    return $this->db->query($query)->result_array();
+  }
+
+  // create a message on an event page
+  public function create_event_message($post_data)
+  {
+    $query = "INSERT INTO messages (content, receiver_id, sender_id, events_id, created_at, updated_at) VALUES (?,?,?,?,NOW(),NOW())";
+    $values = array($post_data['message'], $post_data['receiver_id'], $post_data['sender_id'], $post_data['event_id']);
+    return $this->db->query($query, $values);
   }
 }
 ?>

@@ -7,6 +7,7 @@ class Events extends CI_Controller {
   {
     parent::__construct();
     $this->load->model('Event');
+    $this->load->model('Message');
   }
 
   public function index()
@@ -31,10 +32,10 @@ class Events extends CI_Controller {
    $updated_at=date('Y-m-d H:i:s');
    $this->load->model('User');
    $row=$this->User->find($this->session->userdata('id'));
-   
+
 
    $creator_id=$row['id'];
-  
+
    $table=array(
     'name'=> $name,
     'description'=> $description,
@@ -100,43 +101,45 @@ class Events extends CI_Controller {
     $this->load->model('Event');
     $table['events']= $this->Event->display_soonest();
     $this->load->view('partials/soonest', $table);
-    
+
   }
   public function display_latest(){
 
     $this->load->model('Event');
     $table['events']= $this->Event->display_latest();
     $this->load->view('partials/latest', $table);
-    
+
   }
   public function display_spots_most(){
 
     $this->load->model('Event');
     $table['events']= $this->Event->display_spots_most();
     $this->load->view('partials/spots_most', $table);
-    
+
   }
    public function display_spots_least(){
 
     $this->load->model('Event');
     $table['events']= $this->Event->display_spots_least();
     $this->load->view('partials/spots_least', $table);
-    
+
   }
 
   // needs to take in parameter for event
   public function show($id)
   {
     $view_data['event'] = $this->Event->show_by_id($id);
-    // $view_data['event']['departure_location'] = (str_replace(' ', '+', $view_data['event']['departure_location']));
+    $view_data['current_user_id'] = 23;// $this->session->userdata['current_user'];
+    // $view_data['messages'] = $this->Message->get_all_event_messages($this->session->userdata('id'));
     $this->load->view('single_event', $view_data);
   }
+
   public function google(){
     $array=$this->input->post();
     foreach ($array as $key => $value) {
       $value=$key;
     }
-    
+
     $html = file_get_contents("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=".urlencode($value)."&key=AIzaSyApbO-TW6-gkolVfdL1uKgqDCP2rC3fg2A");
     $this->output
        ->set_content_type('application/json')
