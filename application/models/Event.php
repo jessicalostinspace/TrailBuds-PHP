@@ -22,23 +22,23 @@ class Event extends CI_Model
    }
    public function display_everything()
    {
-    return $this->db->query("SELECT *, (events.attendees - count(attendees.id)) as 'attendees_remaining' from events left join attendees on attendees.event_id=events.id group by events.id order by departure_date")->result_array();
+    return $this->db->query("SELECT *, (events.attendees - count(attendees.attendance_id)) as 'attendees_remaining' from events left join attendees on attendees.event_id=events.id group by events.id order by departure_date")->result_array();
    }
    public function display_soonest()
    {
-    return $this->db->query("SELECT *, (events.attendees - count(attendees.id)) as 'attendees_remaining' from events left join attendees on attendees.event_id=events.id group by events.id order by departure_date")->result_array();
+    return $this->db->query("SELECT *, (events.attendees - count(attendees.attendance_id)) as 'attendees_remaining' from events left join attendees on attendees.event_id=events.id group by events.id order by departure_date")->result_array();
    }
    public function display_latest()
    {
-    return $this->db->query("SELECT *, (events.attendees - count(attendees.id)) as 'attendees_remaining' from events left join attendees on attendees.event_id=events.id group by events.id order by departure_date desc")->result_array();
+    return $this->db->query("SELECT *, (events.attendees - count(attendees.attendance_id)) as 'attendees_remaining' from events left join attendees on attendees.event_id=events.id group by events.id order by departure_date desc")->result_array();
    }
    public function display_spots_least()
    {
-    return $this->db->query("SELECT *, (events.attendees - count(attendees.id)) as 'attendees_remaining' from events left join attendees on attendees.event_id=events.id group by events.id order by attendees_remaining")->result_array();
+    return $this->db->query("SELECT *, (events.attendees - count(attendees.attendance_id)) as 'attendees_remaining' from events left join attendees on attendees.event_id=events.id group by events.id order by attendees_remaining")->result_array();
   }
     public function display_spots_most()
     {
-    return $this->db->query("SELECT *, (events.attendees - count(attendees.id)) as 'attendees_remaining' from events left join attendees on attendees.event_id=events.id group by events.id order by attendees_remaining desc")->result_array();
+    return $this->db->query("SELECT *, (events.attendees - count(attendees.attendance_id)) as 'attendees_remaining' from events left join attendees on attendees.event_id=events.id group by events.id order by attendees_remaining desc")->result_array();
   }
 
    public function display_all()

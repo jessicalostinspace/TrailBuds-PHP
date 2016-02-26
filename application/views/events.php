@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   
  
@@ -24,15 +23,18 @@
   </style>
 </head>
 <body>
-	
+ <li id='hidden' class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+      </ul>
+    </li>
 
-
-<div class="container">
+<div class='container'>
   <!-- Trigger the modal with a button -->
   <div id='apricot' class='container-fluid'>
-  <div id='avocado' class="container">
-     <div class="dropdown">
-        <button class="btn btn-default btn-lg dropdown-toggle" id='filter_btn' type="button" data-toggle="dropdown">Filter By
+     <div id='avocado' class="container">
+      <div class='dropdown'>
+        <button class="btn-lg dropdown-toggle" id='filter_btn' type="button" data-toggle="dropdown">Filter By
         <span style='color:white' class="caret"></span></button>
         <ul class="dropdown-menu">
           <li class="dropdown-header"><span class='glyphicon glyphicon-time green_glyph'> </span>  Departure Date</li>
@@ -42,14 +44,14 @@
           <li class="dropdown-header"><span class='glyphicon glyphicon-user green_glyph'></span>  Spots Remaining</li>
           <li><a href="#" id='btn3' ><span class='glyphicon glyphicon-arrow-up green_glyph'></span>  Most</a></li>
           <li><a href="#" id='btn4' ><span class='glyphicon glyphicon-arrow-down green_glyph'></span>  Least</a></li>
+          
         </ul>
       </div>
     </div>
-	
- <div id='peach'>
-  <button type="button" class="btn btn-default btn-lg" id="myBtn"><span style='color:white' class="glyphicon glyphicon-plus"></span>  Create An Event</button>
-</div>
-</div>
+       <div id='peach'>
+        <button type="button" class="btn btn-default btn-lg" id="myBtn"><span style='color:white' class="glyphicon glyphicon-plus"></span>  Create An Event</button>
+      </div>
+      </div>
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -177,7 +179,7 @@
       </div>
     </div>
   </div> 
-</div>
+
 
 
 <div id='orange' class='container'>
@@ -187,8 +189,7 @@
 
 <script type='text/javascript'>
 $(document).ready(function(){
-  $('.dropdown-toggle').dropdown()
-	$('#image_container').css('height', $(window).height()/2);
+
 	$.get('/events/display_all_events', function(res){
 		$('#orange').html(res);
 	});
@@ -197,6 +198,7 @@ $(document).ready(function(){
 		$("#myModal").modal();
 	<?php }
 	?>
+  $('.dropdown-toggle').dropdown();
 	$('#myBtn').hover(
        function () {
           $(this).css({"background-color":"#FF7E17"});
@@ -218,9 +220,7 @@ $(document).ready(function(){
     $("#myBtn").click(function(){
         $("#myModal").modal();
     });
-    $("#btn-md").click(function(){
-        console.log('hello');
-    });
+    
     
     $('#btn1').click(function(){
     	$.get('/events/display_soonest', function(res){
@@ -252,7 +252,6 @@ $(document).ready(function(){
      		$('#starfruit').html(new_html);
      	});
      });
-   
 
  });
 </script>
@@ -356,7 +355,7 @@ $(document).ready(function(){
 #myBtn{
 	color:white;
 	background-color:#005200;
-  border: transparent;	
+  border: transparent;
 }
 #mymodal{
   height:40em;
@@ -371,20 +370,21 @@ $(document).ready(function(){
 
 #avocado{
 	display: inline-block;
-	vertical-align: bottom;
 	width: 55%;
-  margin-left: 3%;
+  margin-left: 10%;
 }
-
+.red {
+  color: red;
+}
 .thumbnail {
   display: inline-block;
   vertical-align: top;
-  border: 1px solid lightgrey;
   margin-top: 5%;
   padding: 4%;
   padding-bottom: 2%;
   height: 31em;
   width: 100%;
+  box-shadow: 2px 2px 5px #aaa;
 
 }
 .tree{
@@ -413,7 +413,7 @@ h4 {
 	color: #222222;
 }
 body{
-	background: url('http://i.imgur.com/hkqRlDm.png');
+	background-color:#f8f8f8;
   
 }
 
@@ -442,12 +442,10 @@ body{
 #apricot{
   width: 100%;
   background-color: white;
-  border-bottom: 1px solid lightgrey;
+  border: 1px solid lightgrey;
   height: 5em;
   margin-top: -1.5%;
   margin-left: -10%;
-
-
   position: fixed;
   z-index: 5;
 
@@ -531,6 +529,11 @@ body{
 .green_glyph{
   color:#005200;
 }
+#hidden{
+  margin-top: -1%;
+  visibility: hidden;
+}
+
 </style>
 
 
