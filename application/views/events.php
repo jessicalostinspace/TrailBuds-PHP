@@ -334,7 +334,8 @@ $(document).ready(function(){
 	display: inline-block;
 	vertical-align: bottom;
   margin-top: 1.2%;
-  margin-left: 25%;	
+  margin-left: 16%;
+
 }
 .modal-header{
   background-color:#005200;
@@ -344,7 +345,7 @@ $(document).ready(function(){
     background-color: #005200;
     border: transparent;
     position: relative;
-    right: 322px;
+
 }
 #mymodal{
   height:40em;
@@ -362,6 +363,7 @@ $(document).ready(function(){
   /*margin-left: -2%;*/
   width: 16%;
   vertical-align: bottom;
+
 
 }
 .red {
@@ -431,9 +433,9 @@ body{
   color: white;
 }
 #apricot{
-  width: 105%;
+  width: 110%;
   background-color: white;
-  border: 1px solid lightgrey;
+  border: 1px solid grey;
   height: 5em;
   margin-top: -0.5%;
   margin-left: -20%;
@@ -529,7 +531,7 @@ body{
   display: inline-block;
   vertical-align: bottom;
   width: 44em;
-
+  margin-left: -10%;
   margin-top: 1%;
 }
 #searchbtn{
