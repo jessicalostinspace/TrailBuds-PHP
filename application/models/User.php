@@ -11,6 +11,11 @@ class User extends CI_Model
 		$query = "SELECT * FROM users WHERE facebook_id = ?";
 		return $this->db->query($query, array($fb_id))->row_array();
 	}
+	public function find_id($id)
+	{
+		$query = "SELECT * FROM users WHERE id = ?";
+		return $this->db->query($query, array($id))->row_array();
+	}
 
 		public function getAllInfo($id)
 	{
@@ -38,6 +43,7 @@ class User extends CI_Model
 
 		return $this->db->query($query, array($location, $description, $id));
 	}
+	
 
 	
 

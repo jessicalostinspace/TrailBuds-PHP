@@ -1,9 +1,8 @@
 <?php
 
 
-
 ?>
-
+			
 		<?php
 
 		foreach ($events as $event) {
@@ -16,10 +15,10 @@
 			?>
 
 			
-			  <div class="col-sm-6 col-md-6">
+			  <div class="col-sm-4 col-md-6">
 			    <div class="thumbnail">
 		    	<div class='container' id='events_top_div'>
-		    	<div class='container'   id='event_image'>
+		    	<div class='container' id='event_image'>
 			      <?php 
 			      	if ($event['image_url']===NULL) {
 			      		echo "<img class='tree' src='http://i.imgur.com/UzXt2Uw.png'>";
@@ -55,7 +54,6 @@
 			    </div>
 			  </div>
 			
-			
 	<?php 	} 
 
 		?>
@@ -65,6 +63,7 @@ $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();
 
   });
+</script>
 
 
 

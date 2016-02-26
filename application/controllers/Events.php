@@ -31,9 +31,9 @@ class Events extends CI_Controller {
    $created_at=date('Y-m-d H:i:s');
    $updated_at=date('Y-m-d H:i:s');
    $this->load->model('User');
-   $row=$this->User->find($this->session->userdata('id'));
 
-
+   $user_session_id=($this->session->userdata('id')['id']);
+   $row=$this->User->find_id($user_session_id);
    $creator_id=$row['id'];
 
    $table=array(
