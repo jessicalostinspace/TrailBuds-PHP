@@ -24,9 +24,23 @@ class Messages extends CI_Controller {
   	$sender_id = $this->session->userdata('id');
 
   	$this->Message->create_personal($content, $sender_id, $id);
-  	redirect('/users/show_profile');
+  	redirect('/users/show_profile/'.$id);
   }
 
+    public function replyPersonal($id)
+  {
+    $content = $this->input->post('content');
+
+    //This should be users auto incremented id
+    $sender_id = $this->session->userdata('id');
+
+    $this->Message->create_personal($content, $sender_id, $id);
+
+    redirect('/messages/showPersonal');
+
+  }
+
+  //Shows all personal messages on home page
   public function showPersonal()
   {
   	$id = $this->session->userdata('id');

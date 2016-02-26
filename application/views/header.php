@@ -100,7 +100,7 @@ window.onload=function()
     //and if you authenticated via oAuth (server side), this is necessary.
     //If you logged in via the JavaScript SDK, you can simply call FB.logout()
     //once the login status is fetched, call handleSessionResponse
-    FB.getLoginStatus(logOutWithFacebook);
+    // FB.getLoginStatus(logOutWithFacebook);
 }
 
 
@@ -116,7 +116,6 @@ function logOutWithFacebook() {
       if (response && response.status === "connected") {
 
         FB.logout(function(response) {
-           $.get('logout');
           if (response.status != "connected") {
 
              window.location = "/";
@@ -124,6 +123,8 @@ function logOutWithFacebook() {
           }
         });
       }
+      
+      $.get('logout');
     });
 
 
@@ -184,27 +185,28 @@ function logOutWithFacebook() {
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right nav-pills ">
-        <?php
-          if($this->session->userdata( 'fb_access_token' )){
+<?php
+          $logged_in = $this->session->userdata( 'fb_access_token' ) ? true : false;
+
+          if($logged_in) {
 ?>
-          <li><a href="/users">Profile</a></li>
-          <?php } ?>
+          <li><a href="/profile/<?= $this->session->userdata('id')['id'] ?>">Profile</a></li>
+<?php } 
+?>
           <li><a href="/all">Events</a></li>
-                 <?php
-          if($this->session->userdata( 'fb_access_token' )){
+<?php
+          if($logged_in){
 ?>
           <li><a id="fb_logout" class="btn" href="#">Logout</a></li>
-          <?php } ?>
+<?php } 
+          if (!$logged_in ) {
+?>
           <li><a id="login_button" class="btn" href="#" onClick="logInWithFacebook()"></a></li>
+<?php
+        }
+?>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-            </ul>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
           </li>
         </ul>
       </div><!-- /.navbar-collapse -->

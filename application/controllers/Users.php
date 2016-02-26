@@ -54,7 +54,7 @@ class Users extends CI_Controller {
 
     try {
       // Returns a `Facebook\FacebookResponse` object
-      $response = $fb->get('/me?fields=id,name,first_name,last_name,email,birthday,gender,picture', $accessToken);
+      $response = $fb->get('/me?fields=id,name,first_name,last_name,email,birthday,gender,picture.width(800).height(800)', $accessToken);
     } catch(Facebook\Exceptions\FacebookResponseException $e) {
       echo 'Graph returned an error: ' . $e->getMessage();
       exit;
@@ -126,6 +126,9 @@ class Users extends CI_Controller {
 
   public function logout()
   {
+    // var_dump($_SERVER['HTTP_REFERER']);
+    // var_dump(($this->input->session()));
+    // die();
 
      // Logs off session from website
              // $this->load->library('facebook');
@@ -153,7 +156,7 @@ class Users extends CI_Controller {
 
     $this->User->addProfileInfo($location, $description, $id);
 
-    redirect('/users/show_profile');
+    redirect('/users/show_profile/'.$id['id']);
   }
 
 }

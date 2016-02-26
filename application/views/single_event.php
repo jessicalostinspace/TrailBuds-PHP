@@ -1,57 +1,5 @@
 <?php require_once('header.php'); ?>
 
-
-    <style>
-
-      p.right {
-        float: right;
-        margin-left: 10px;
-      }
-
-      div#map {
-        margin-bottom: 20px;
-      }
-
-      div.sidebar {
-        padding: 20px;
-      }
-
-      /*put this bg color on body*/
-      body {
-        background-color: #f8f8f8;
-      }
-
-      div.col-sm-7, div.sidebar {
-        background-color: #ffffff;
-      }
-
-      div.messages {
-        margin-top: 20px;
-        padding: 20px;
-      }
-
-      textarea.form-control {
-        resize: none;
-      }
-
-     /* array (size=14)
-        'id' => string '1' (length=1)
-        'name' => string 'Awesome Hike' (length=12)
-        'description' => string 'DESCRIPTION' (length=11)
-        'hike_location' => string '1831 N 163rd St' (length=15)
-        'distance' => string '3' (length=1)
-        'duration' => string '2' (length=1)
-        'elevation' => string '100' (length=3)
-        'departure_location' => string '4532 19th Ave NW' (length=16)
-        'drive' => string 'Yes' (length=3)
-        'attendees' => string '8' (length=1)
-        'departure_date' => string '2016-02-23 20:12:52' (length=19)
-        'created_at' => string '2016-02-23 20:12:52' (length=19)
-        'updated_at' => string '2016-02-23 20:13:09' (length=19)
-        'creator_id' => string '16' (length=2)*/
-
-    </style>
-
     <div id="map" style="width: 100%; height: 300px;"></div>
 
     <div class="container wrapper">

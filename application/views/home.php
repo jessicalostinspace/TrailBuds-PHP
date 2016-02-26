@@ -19,7 +19,7 @@ require_once('header.php');
   		<div class="form-group col-xs-7">
   		  <h1><label style="color:white;" for="city">Find a trail buddy</label></h1>
         <form>
-  		  <input id="autocomplete" type="search" class="form-control input-lg" id="city" placeholder="Enter your city">
+  		  <input id="autocomplete" type="search" class="form-control input-lg" id="city" placeholder="Enter your city" autofocus>
       </form>
   		</div>
       
