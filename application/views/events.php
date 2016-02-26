@@ -339,9 +339,11 @@ $(document).ready(function(){
   background-color:#005200;
 }
 #myBtn{
-	color:white;
-	background-color:#005200;
-  border: transparent;
+    color: white;
+    background-color: #005200;
+    border: transparent;
+    position: relative;
+    right: 322px;
 }
 #mymodal{
   height:40em;
@@ -356,7 +358,7 @@ $(document).ready(function(){
 
 #avocado{
 	display: inline-block;
-  margin-left: -2%;
+  /*margin-left: -2%;*/
   width: 16%;
   vertical-align: bottom;
 
@@ -372,7 +374,7 @@ $(document).ready(function(){
   padding-bottom: 2%;
   height: 33em;
   width: 100%;
-  box-shadow: 2px 2px 5px #aaa;
+  box-shadow: 0px 0px 15px #ddd;
 
 }
 .tree{
@@ -428,13 +430,14 @@ body{
   color: white;
 }
 #apricot{
-  width: 100%;
+  width: 105%;
   background-color: white;
   border: 1px solid lightgrey;
   height: 5em;
-  margin-top: -1.5%;
-  margin-left: -10%;
+  margin-top: -0.5%;
+  margin-left: -20%;
   position: fixed;
+  padding-left:383px;
   z-index: 5;
 
 }
