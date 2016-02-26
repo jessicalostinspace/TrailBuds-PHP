@@ -19,19 +19,36 @@ class Message extends CI_Model
   }
 
   //this id is session id to display on personal messages page
-  public function getAllPersonal($id)
+  //called when user clicks on #of messages they have on their user profile
+  public function getAllPersonal($receiver_id)
   {
-  	$query = "SELECT messages.content, sender.picture_url, sender.id, sender.first_name, sender.last_name, messages.updated_at
+  	$query = "SELECT sender.id, messages.content, sender.picture_url, sender.first_name, sender.last_name, messages.updated_at
   			FROM messages 
   			LEFT JOIN users AS sender
   			ON messages.sender_id = sender.id
   			LEFT JOIN users AS receiver
   			ON messages.receiver_id = receiver.id
-  			WHERE receiver_id = ?
+  			WHERE receiver_id = ? 
   			ORDER BY messages.updated_at DESC;";
   			// var_dump($query);
-  			// var_dump($this->db->query($query, array($id))->result_array());die;
-  	return $this->db->query($query, array($id))->result_array();
+  			// var_dump($this->db->query($query, array($receiver_id))->result_array());die;
+  	return $this->db->query($query, array($receiver_id))->result_array();
+  }
+
+
+  public function getHistory($receiver_id, $sender_id)
+  {
+    $query = "SELECT messages.content, sender.picture_url, sender.id, sender.first_name, sender.last_name, messages.updated_at
+        FROM messages 
+        LEFT JOIN users AS sender
+        ON messages.sender_id = sender.id
+        LEFT JOIN users AS receiver
+        ON messages.receiver_id = receiver.id
+        WHERE (receiver_id = ? AND sender_id = ?) OR (receiver_id = ? AND sender_id = ? )
+        ORDER BY messages.updated_at DESC;";
+        // var_dump($query);
+        // var_dump($this->db->query($query, array($id))->result_array());die;
+    return $this->db->query($query, array($receiver_id, $sender_id, $sender_id, $receiver_id))->result_array();
   }
 }
 ?>

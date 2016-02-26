@@ -27,27 +27,42 @@ class Messages extends CI_Controller {
   	redirect('/users/show_profile/'.$id);
   }
 
-    public function replyPersonal($id)
+    public function replyPersonal($receiver_id)
   {
     $content = $this->input->post('content');
 
     //This should be users auto incremented id
-    $sender_id = $this->session->userdata('id');
+    $sender_id = $this->session->userdata('id')['id'];
 
-    $this->Message->create_personal($content, $sender_id, $id);
+    $this->Message->create_personal($content, $sender_id, $receiver_id);
 
-    redirect('/messages/showPersonal');
+    $messages['messages'] = $this->Message->getHistory($receiver_id, $sender_id);
 
+    $this->load->view('/partials/modalmessages', array("messages" => $messages['messages'], "sender_id" => $sender_id));   
+
+  }
+
+  //called from messages/partials when user clicks on a user in their message box
+  public function showHistory($sender_id)
+  {
+    $receiver_id = $this->session->userdata('id')['id'];
+
+    $messages['messages'] = $this->Message->getHistory($receiver_id, $sender_id);
+
+    $this->load->view('/partials/modalmessages', array("messages" => $messages['messages'], "sender_id" => $sender_id));   
   }
 
   //Shows all personal messages on home page
   public function showPersonal()
   {
-  	$id = $this->session->userdata('id');
-   	$messages['messages'] = $this->Message->getAllPersonal($id);
+  	$receiver_id = $this->session->userdata('id')['id'];
+
+   	$messages['messages'] = $this->Message->getAllPersonal($receiver_id);
    	// var_dump($messages); die;
 
     $this->load->view('/partials/messages', $messages); 	
   }
+
+
 }
 ?>

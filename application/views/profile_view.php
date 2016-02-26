@@ -60,10 +60,21 @@ $(document).ready(function(){
 			}, 'html');
 
     $("body").on("click", ".view_chat",function(){
-    	// alert("test");
-
-	    $("#privateMsgModal").modal();
+    	$.get($(this).attr('href'), function(res){
+    		$("#privateMsgModal").html(res);
+		    $("#privateMsgModal").modal();
+    	});
     });	
+
+    // $('#newMsg').submit(function(){
+
+    // 		console.log("test");
+    // 	$.post($(this).attr('action'), function(res){
+    // 		console.log(res);
+    // 	});
+    // 	return false;
+    //  });
+
 
     // $.get('https://api.layer.com', function(res){
 
@@ -81,7 +92,7 @@ $(document).ready(function(){
 });
 </script>
 
-	<div class="container">
+	<div class=" container">
 		<div class="images row">
 	    	<div class="col-sm-12">
 	    		<img class="profile_background .img-responsive" src="/assets/images/treesprofile.jpeg" alt="Trees Default">
