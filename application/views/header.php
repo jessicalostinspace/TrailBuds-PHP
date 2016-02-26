@@ -112,7 +112,6 @@ function logOutWithFacebook() {
     //if we dont have a session (which means the user has been logged out, redirect the user)
 
     FB.getLoginStatus(function(response) {
-      console.log(response);
       if (response && response.status === "connected") {
 
         FB.logout(function(response) {

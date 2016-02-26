@@ -7,6 +7,7 @@ class Events extends CI_Controller {
   {
     parent::__construct();
     $this->load->model('Event');
+    $this->load->model('Message');
   }
 
   public function index()
@@ -26,14 +27,15 @@ class Events extends CI_Controller {
    $drive=$this->input->post('drive');
    $attendees=$this->input->post('attendees');
    $departure_date=$this->input->post('departure_date');
+   $image_url=$this->input->post('image_url');
    $created_at=date('Y-m-d H:i:s');
    $updated_at=date('Y-m-d H:i:s');
    $this->load->model('User');
    $row=$this->User->find($this->session->userdata('id'));
-   
+
 
    $creator_id=$row['id'];
-  
+
    $table=array(
     'name'=> $name,
     'description'=> $description,
@@ -47,16 +49,18 @@ class Events extends CI_Controller {
     'departure_date'=> $departure_date,
     'created_at'=> $created_at,
     'updated_at'=> $updated_at,
-    'creator_id'=> $creator_id
+    'creator_id'=> $creator_id,
+    'image_url'=>$image_url
     );
   $this->load->library("form_validation");
-  $this->form_validation->set_rules('name', 'Name', 'trim|required|max_length[25]');
-  $this->form_validation->set_rules('description', 'Description', 'max_length[75]');
+  $this->form_validation->set_rules('name', 'Name', 'trim|required|max_length[50]');
+  $this->form_validation->set_rules('description', 'Description', 'max_length[150]');
   $this->form_validation->set_rules('hike_location', 'Hike Location', 'trim|required');
   $this->form_validation->set_rules('distance', 'Distance', 'trim|required');
   $this->form_validation->set_rules('duration', 'Duration', 'trim|required');
   $this->form_validation->set_rules('departure_location', 'Meeting Location', 'trim|required');
   $this->form_validation->set_rules('departure_date', 'Departure Date', 'trim|required');
+  $this->form_validation->set_rules('image_url', 'Image URL', 'trim|required|max_length[350]');
   if ($this->form_validation->run() === FALSE) {
 
       $this->session->set_flashdata('name_error', form_error('name'));
@@ -66,6 +70,7 @@ class Events extends CI_Controller {
       $this->session->set_flashdata('duration_error', form_error('duration'));
       $this->session->set_flashdata('departure_location_error', form_error('departure_location'));
       $this->session->set_flashdata('departure_date_error', form_error('departure_date'));
+      $this->session->set_flashdata('image_url_error', form_error('image_url'));
       redirect('/events/show_all');
     }
   else {
@@ -96,43 +101,45 @@ class Events extends CI_Controller {
     $this->load->model('Event');
     $table['events']= $this->Event->display_soonest();
     $this->load->view('partials/soonest', $table);
-    
+
   }
   public function display_latest(){
 
     $this->load->model('Event');
     $table['events']= $this->Event->display_latest();
     $this->load->view('partials/latest', $table);
-    
+
   }
   public function display_spots_most(){
 
     $this->load->model('Event');
     $table['events']= $this->Event->display_spots_most();
     $this->load->view('partials/spots_most', $table);
-    
+
   }
    public function display_spots_least(){
 
     $this->load->model('Event');
     $table['events']= $this->Event->display_spots_least();
     $this->load->view('partials/spots_least', $table);
-    
+
   }
 
   // needs to take in parameter for event
   public function show($id)
   {
     $view_data['event'] = $this->Event->show_by_id($id);
-    // $view_data['event']['departure_location'] = (str_replace(' ', '+', $view_data['event']['departure_location']));
+    $view_data['current_user_id'] = 23;// $this->session->userdata['current_user'];
+    // $view_data['messages'] = $this->Message->get_all_event_messages($this->session->userdata('id'));
     $this->load->view('single_event', $view_data);
   }
+
   public function google(){
     $array=$this->input->post();
     foreach ($array as $key => $value) {
       $value=$key;
     }
-    
+
     $html = file_get_contents("https://maps.googleapis.com/maps/api/place/autocomplete/json?input=".urlencode($value)."&key=AIzaSyApbO-TW6-gkolVfdL1uKgqDCP2rC3fg2A");
     $this->output
        ->set_content_type('application/json')

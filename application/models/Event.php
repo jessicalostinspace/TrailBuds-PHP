@@ -11,8 +11,8 @@ class Event extends CI_Model
    public function create_event($table)
    {
 
-    $query="INSERT INTO events(name, description, hike_location, distance, duration, elevation, departure_location, drive, attendees, departure_date, created_at, updated_at, creator_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    $values=array($table['name'], $table['description'], $table['hike_location'], $table['distance'], $table['elevation'], $table['duration'], $table['departure_location'], $table['drive'], $table['attendees'], $table['departure_date'], $table['created_at'], $table['updated_at'], $table['creator_id']);
+    $query="INSERT INTO events(name, description, hike_location, distance, duration, elevation, departure_location, drive, attendees, departure_date, created_at, updated_at, creator_id, image_url) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $values=array($table['name'], $table['description'], $table['hike_location'], $table['distance'], $table['elevation'], $table['duration'], $table['departure_location'], $table['drive'], $table['attendees'], $table['departure_date'], $table['created_at'], $table['updated_at'], $table['creator_id'], $table['image_url']);
     return $this->db->query($query,$values);
    }
 
