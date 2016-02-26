@@ -2,7 +2,8 @@
 
 
 ?>
-			
+		
+		<div id='special'><h5><?php echo 'Showing Results for Seattle...' ?></h5></div>	
 		<?php
 
 		foreach ($events as $event) {
@@ -13,7 +14,22 @@
 			
 			
 			?>
+			<script type="text/javascript">
+			<?php
+			unset($location1);
+			unset($location);
+			$location1=str_replace(',', '', $event['hike_location']); 
+			$location=str_replace(' ', '', $location1); 
+			?>
 
+			$(document).ready(function(){
+				$.get(<?php echo "'/distance/" . $location . "'" ?>, function(res){
+					$(<?php echo "'#longbox" . $event['id'] . "'"?>).append("<a href='#' style='height:3em'class='list-group-item green_list'><p><span style='font-weight:bold'>Distance Away: </span>" + res.rows[0].elements[0].distance.text + "</p></a>")
+				}, 'json');
+			});
+
+
+		</script>
 			
 			  <div class="col-sm-4 col-md-6">
 			    <div class="thumbnail">
@@ -35,14 +51,15 @@
 			      </div>
 			  	</div>
 			      <div class='coconut'>
-			      	<div id='smallbox' class="list-group">
+			      	<div class="list-group smallbox">
+
 			      		<a style='height:3em'class="list-group-item event_list_top green_tooltip" id='list_spots' data-html='true' data-toggle="tooltip" title='<?php echo 'Max Attendees: ' . $event['attendees'] . '</br>Spots Remaining: ' . $event['attendees_remaining']?> '><?php echo "<p><span class='glyphicon glyphicon-user'></span>  " . $event['attendees_remaining'] . " spots left</p>"?></a>
 			      		<a style='height:3em'class="list-group-item event_list_top green_tooltip" data-toggle="tooltip" title='<?php echo 'Hike Distance: ' . $event['distance'] . ' miles' ?> '><?php echo "<p><span class='glyphicon glyphicon-road'></span>  " . $event['distance'] . " miles</p>"?></a>
 			      		<a style='height:3em'class="list-group-item event_list_top green_tooltip" data-toggle="tooltip" title='<?php echo 'Hike Duration: ' . $event['duration'] . ' hours' ?> '><?php echo "<p><span class='glyphicon glyphicon-time'></span>  " . $event['duration'] . " hours</p>"?></a>
 			      		<a style='height:3em'class="list-group-item event_list_top green_tooltip" data-toggle="tooltip" title='<?php echo 'Hike Elevation: ' . $event['elevation'] . ' ft' ?> '><?php echo "<p><span class='glyphicon glyphicon-picture'></span>  " . $event['elevation'] . " ft</p>"?></a>
   						
 			      	</div>
-					<div id='longbox' class="list-group">
+					<div id=<?php echo "'longbox" . $event['id'] . "'"?>class="list-group longbox">
   						<a href="#" style='height:3em'class="list-group-item green_list"><?php echo "<p><span style='font-weight:bold'>Hike Location: </span>" . $event['hike_location'] . "</p>"?></a>
   						<a href="#" style='height:3em'class="list-group-item green_list"><?php echo "<p><span style='font-weight:bold'>Departure Location: </span>" . $event['departure_location'] . "</p>"?></a>
   						<a href="#" style='height:3em'class="list-group-item green_list"><?php echo "<p><span style='font-weight:bold'>Departure Date: </span>" . $date1 . "</p>"?></a>

@@ -1,27 +1,8 @@
 <?php require_once('header.php'); ?>
 
 
-<!DOCTYPE html>
-<html>
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  
- 
-  <style>
-  .modal-header, h4, .close {
-      background-color: #5cb85c;
-      color:white !important;
-      text-align: center;
-      font-size: 30px;
-  }
-  .modal-footer {
-      background-color: #f9f9f9;
-  }
-  </style>
-</head>
+
+
 <body>
  <li id='hidden' class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
@@ -47,6 +28,12 @@
           
         </ul>
       </div>
+    </div>
+    <div id='city_searchbar' class="form-group col-xs-7">
+      <form id='searchform'>
+        <input id="autocomplete" type="search" class="form-control input-lg" id="city" placeholder="Enter your city" autofocus>
+      </form>
+       <button type="button" class="btn btn-default btn-md" id="searchbtn"><span class="glyphicon glyphicon-search"></span></button>
     </div>
        <div id='peach'>
         <button type="button" class="btn btn-default btn-lg" id="myBtn"><span style='color:white' class="glyphicon glyphicon-plus"></span>  Create An Event</button>
@@ -342,12 +329,11 @@ $(document).ready(function(){
 }
 
 #peach{
-	margin-left: 10%;
+  width: 16%;
 	display: inline-block;
-	width: 16%;
 	vertical-align: bottom;
   margin-top: 1.2%;
-	
+  margin-left: 25%;	
 }
 .modal-header{
   background-color:#005200;
@@ -370,8 +356,10 @@ $(document).ready(function(){
 
 #avocado{
 	display: inline-block;
-	width: 55%;
-  margin-left: 10%;
+  margin-left: -2%;
+  width: 16%;
+  vertical-align: bottom;
+
 }
 .red {
   color: red;
@@ -382,7 +370,7 @@ $(document).ready(function(){
   margin-top: 5%;
   padding: 4%;
   padding-bottom: 2%;
-  height: 31em;
+  height: 33em;
   width: 100%;
   box-shadow: 2px 2px 5px #aaa;
 
@@ -398,7 +386,7 @@ $(document).ready(function(){
   height: 10em;
   margin-bottom: -5%;
   margin-top: -1%;
-  overflow: scroll;
+  overflow-y: scroll;
   width: 28%;
   
 }
@@ -462,11 +450,11 @@ body{
   margin-bottom: 5%;
   padding: 0px;
 }
-#smallbox{
+.smallbox{
   width:100%;
 
 }
-#longbox{
+.longbox{
   width:100%;
 }
 #event_image {
@@ -532,6 +520,25 @@ body{
 #hidden{
   margin-top: -1%;
   visibility: hidden;
+}
+#city_searchbar{
+  display: inline-block;
+  vertical-align: bottom;
+  width: 44em;
+
+  margin-top: 1%;
+}
+#searchbtn{
+  height: 3.1em;
+  display: inline-block;
+  vertical-align: bottom;
+}
+#searchform{
+  display: inline-block;
+  vertical-align: bottom;
+}
+#autocomplete{
+  width: 30em;
 }
 
 </style>

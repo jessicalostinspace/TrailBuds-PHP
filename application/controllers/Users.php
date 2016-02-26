@@ -106,6 +106,7 @@ class Users extends CI_Controller {
                           'gender' => $user['gender'],
                           'picture_url' => $user['picture']['url'],
                           'logged_in' => TRUE
+                          //'location' => $found_user['location']
                           );
 
     // if found, set their data to session

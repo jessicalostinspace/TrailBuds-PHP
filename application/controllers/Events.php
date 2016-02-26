@@ -100,28 +100,28 @@ class Events extends CI_Controller {
 
     $this->load->model('Event');
     $table['events']= $this->Event->display_soonest();
-    $this->load->view('partials/soonest', $table);
+    $this->load->view('partials/events', $table);
 
   }
   public function display_latest(){
 
     $this->load->model('Event');
     $table['events']= $this->Event->display_latest();
-    $this->load->view('partials/latest', $table);
+    $this->load->view('partials/events', $table);
 
   }
   public function display_spots_most(){
 
     $this->load->model('Event');
     $table['events']= $this->Event->display_spots_most();
-    $this->load->view('partials/spots_most', $table);
+    $this->load->view('partials/events', $table);
 
   }
    public function display_spots_least(){
 
     $this->load->model('Event');
     $table['events']= $this->Event->display_spots_least();
-    $this->load->view('partials/spots_least', $table);
+    $this->load->view('partials/events', $table);
 
   }
 
@@ -145,6 +145,14 @@ class Events extends CI_Controller {
        ->set_content_type('application/json')
        ->set_output($html);
   }
+  public function distance($hike_location)
+ {
+  
+  $html = file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?origins=Seattle&destinations=' . urlencode($hike_location) . '&mode=driving&language=en-US&key=AIzaSyApbO-TW6-gkolVfdL1uKgqDCP2rC3fg2A');
+  $this->output
+       ->set_content_type('application/json')
+       ->set_output($html);
+ }
 
 }
 ?>
