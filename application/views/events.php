@@ -18,13 +18,14 @@
         <button class="btn-lg dropdown-toggle" id='filter_btn' type="button" data-toggle="dropdown">Filter By
         <span style='color:white' class="caret"></span></button>
         <ul class="dropdown-menu">
-          <li class="dropdown-header"><span class='glyphicon glyphicon-time green_glyph'> </span>  Departure Date</li>
-          <li><a href="#" id='btn1' ><span class='glyphicon glyphicon-arrow-up green_glyph'></span>  Soonest</a></li>
-          <li><a href="#" id='btn2' ><span class='glyphicon glyphicon-arrow-down green_glyph'></span>  Latest</a></li>
+          <li class="dropdown-header"><span class='glyphicon glyphicon-calendar green_glyph'> </span>  Departure Date</li>
+          <li><a href="#" id='btn1' ><span class='glyphicon glyphicon-time green_glyph'></span>  Soonest</a></li>
+          <li><a href="#" id='btn2' ><span class='glyphicon glyphicon-time green_glyph'></span>  Latest</a></li>
           <li class="divider"></li>
           <li class="dropdown-header"><span class='glyphicon glyphicon-user green_glyph'></span>  Spots Remaining</li>
-          <li><a href="#" id='btn3' ><span class='glyphicon glyphicon-arrow-up green_glyph'></span>  Most</a></li>
-          <li><a href="#" id='btn4' ><span class='glyphicon glyphicon-arrow-down green_glyph'></span>  Least</a></li>
+          <li><a href="#" id='btn4' ><span class='glyphicon glyphicon-arrow-up green_glyph'></span>  Most</a></li>
+          <li><a href="#" id='btn3' ><span class='glyphicon glyphicon-arrow-down green_glyph'></span>  Least</a></li>
+          
           
         </ul>
       </div>
