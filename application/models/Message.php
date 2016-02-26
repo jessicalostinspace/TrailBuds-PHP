@@ -29,7 +29,7 @@ class Message extends CI_Model
   			ON messages.sender_id = sender.id
   			LEFT JOIN users AS receiver
   			ON messages.receiver_id = receiver.id
-  			WHERE receiver_id = ? 
+  			WHERE receiver_id = ?
   			ORDER BY messages.updated_at DESC;";
   			// var_dump($query);
   			// var_dump($this->db->query($query, array($receiver_id))->result_array());die;
@@ -40,7 +40,7 @@ class Message extends CI_Model
   public function getHistory($receiver_id, $sender_id)
   {
     $query = "SELECT messages.content, sender.picture_url, sender.id, sender.first_name, sender.last_name, messages.updated_at
-        FROM messages 
+        FROM messages
         LEFT JOIN users AS sender
         ON messages.sender_id = sender.id
         LEFT JOIN users AS receiver
@@ -57,7 +57,7 @@ class Message extends CI_Model
   {
     $query = "SELECT * FROM events
               JOIN messages ON messages.events_id = events.id
-              JOIN users ON messages.sender_id = users.id ORDER BY messages.id DESC";
+              JOIN users ON messages.sender_id = users.id WHERE events.id = '$event_id' ORDER BY messages.id DESC";
     return $this->db->query($query)->result_array();
   }
 

@@ -9,7 +9,15 @@ require_once('header.php');
     background-size:100% auto;
       /*background-size: cover;*/
   }
+
+
+input:focus { 
+    outline:none;
+    border-color: #036b06;
+    box-shadow:10 10 10px #036b06;
+}
 </style>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
@@ -21,7 +29,7 @@ require_once('header.php');
         <div class="form-group col-sm-4">
            <h1><label style="color:white;" for="city">Find a trail buddy</label></h1>
            <form>
-             <input id="autocomplete" type="search" class="form-control input-lg" id="city" placeholder="Enter your city" autofocus>
+             <input id="autocomplete" type="search" class="form-control input-lg" id="city" placeholder="Enter your city" >
            </form>
         </div>
        </div>

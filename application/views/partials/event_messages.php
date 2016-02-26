@@ -1,3 +1,4 @@
+<!-- Partial to display all messages particular to each event -->
 <?php foreach ($messages as $message) { ?>
   <div class="single-message" style="padding: 15px 15px 25px 15px; margin-top: 0px;">
     <hr>
