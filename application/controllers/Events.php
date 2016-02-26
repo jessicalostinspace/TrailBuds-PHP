@@ -129,7 +129,7 @@ class Events extends CI_Controller {
   public function show($id)
   {
     $view_data['event'] = $this->Event->show_by_id($id);
-    $view_data['current_user_id'] = 23;// $this->session->userdata['current_user'];
+    $view_data['current_user_id'] = (int) $this->session->userdata['id']['id'];
     // $view_data['messages'] = $this->Message->get_all_event_messages($this->session->userdata('id'));
     $this->load->view('single_event', $view_data);
   }

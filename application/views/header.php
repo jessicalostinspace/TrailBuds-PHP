@@ -123,7 +123,7 @@ function logOutWithFacebook() {
           }
         });
       }
-      
+
       $.get('logout');
     });
 
@@ -148,28 +148,12 @@ function logOutWithFacebook() {
     js.src = "//connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));
-
-    // Fix sticky navbar to top of page
-    var navbar = $('#navbar-main'),
-        distance = navbar.offset().top,
-        $window = $(window);
-
-    $window.scroll(function() {
-        if ($window.scrollTop() >= distance) {
-            navbar.removeClass('navbar-fixed-top').addClass('navbar-fixed-top');
-            $("body").css("padding-top", "70px");
-        } else {
-            navbar.removeClass('navbar-fixed-top');
-            $("body").css("padding-top", "0px");
-        }
-    });
-
  });
 
 
 </script>
 
-  <nav id="navbar-main" class="navbar navbar-inverse navbar-default">
+  <nav id="navbar-main" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -191,14 +175,14 @@ function logOutWithFacebook() {
           if($logged_in) {
 ?>
           <li><a href="/profile/<?= $this->session->userdata('id')['id'] ?>">Profile</a></li>
-<?php } 
+<?php }
 ?>
           <li><a href="/all">Events</a></li>
 <?php
           if($logged_in){
 ?>
           <li><a id="fb_logout" class="btn" href="#">Logout</a></li>
-<?php } 
+<?php }
           if (!$logged_in ) {
 ?>
           <li><a id="login_button" class="btn" href="#" onClick="logInWithFacebook()"></a></li>
@@ -206,7 +190,7 @@ function logOutWithFacebook() {
         }
 ?>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
           </li>
         </ul>
       </div><!-- /.navbar-collapse -->

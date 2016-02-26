@@ -7,7 +7,6 @@ class Attendant extends CI_Model
     return $this->db->query("SELECT * FROM users JOIN attendees ON users.id = attendees.user_id WHERE attendees.event_id = ? ORDER BY attendees.attendance_id DESC", array($event_id))->result_array();
   }
 
-
   // need to fix to not allow duplicate attendees
   public function create($post_data)
   {
