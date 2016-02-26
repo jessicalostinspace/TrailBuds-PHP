@@ -15,16 +15,19 @@ require_once('header.php');
 </head>
 
   <div class="container">
-  	<div id="city_border" class="container">
-  		<div class="form-group col-xs-7">
-  		  <h1><label style="color:white;" for="city">Find a trail buddy</label></h1>
-        <form>
-  		  <input id="autocomplete" type="search" class="form-control input-lg" id="city" placeholder="Enter your city" autofocus>
-      </form>
-  		</div>
-      
-  	</div>
+    <div class="row">
+      <!-- <div class="col-sm-1"></div> -->
+       <div id="city_border" class="col-sm-4">
+        <div class="form-group col-sm-4">
+           <h1><label style="color:white;" for="city">Find a trail buddy</label></h1>
+           <form>
+             <input id="autocomplete" type="search" class="form-control input-lg" id="city" placeholder="Enter your city" autofocus>
+           </form>
+        </div>
+       </div>
+    </div>
   </div>
+
 
 <?php
 require_once('footer.php');

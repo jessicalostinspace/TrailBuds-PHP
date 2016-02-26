@@ -4,6 +4,10 @@
     overflow-y: auto;
 }
 </style>
+
+
+
+
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -41,6 +45,7 @@
         </div>
         </div>
         </div>
+
 <script type="text/javascript">
     $('#newMsg').submit(function(){
     	$.post($(this).attr('action'), $(this).serialize(), function(res){
