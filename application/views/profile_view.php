@@ -114,7 +114,8 @@ $(document).ready(function(){
 					</div>
 
 				</div>
-				<img class="profile_picture .img-rounded" src="http://graph.facebook.com/<?= $user['facebook_id']?>/picture?type=large" alt="Profile picture" style="width:120px; height:120px;">
+
+				<img class="profile_picture .img-rounded" src="<?=$user['picture_url']?>" alt="Profile picture" style="width:120px; height:120px;">
 				<!-- http://graph.facebook.com/{ID}/picture?type=large -->
 
 				<h1 class="username_display"><?= $user['first_name']." ".$user['last_name']?></h1>
