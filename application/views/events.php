@@ -31,8 +31,8 @@
       </div>
     </div>
     <div id='city_searchbar' class="form-group col-xs-7">
-      <form id='searchform'>
-        <input id="autocomplete" type="search" class="form-control input-lg" id="city" placeholder="Enter your city" autofocus>
+      <form method='post' action='distance_from_origin' id='searchform'>
+        <input id="autocomplete" type="search" class="form-control input-lg" name='city' placeholder="Enter your city" autofocus>
       </form>
        <button type="button" class="btn btn-default btn-md" id="searchbtn"><span class="glyphicon glyphicon-search"></span></button>
     </div>
@@ -239,6 +239,9 @@ $(document).ready(function(){
      		
      		$('#starfruit').html(new_html);
      	});
+     });
+     $('#searchbtn').click(function(){
+      $('#searchform').submit();
      });
 
  });

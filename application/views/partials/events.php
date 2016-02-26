@@ -18,6 +18,8 @@
 			<?php
 			unset($location1);
 			unset($location);
+			unset($origin1);
+			unset($origin_point);
 			$location1=str_replace(',', '', $event['hike_location']); 
 			$location=str_replace(' ', '', $location1); 
 			$origin1=str_replace(',', '', $origin);

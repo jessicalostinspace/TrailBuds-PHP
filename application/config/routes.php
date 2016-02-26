@@ -65,6 +65,7 @@ $route['show/(:any)'] = 'events/show/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['route'] = 'events/google';
+$route['distance_from_origin']='events/distance_from_origin';
 
 $route['create_attendee/(:num)/(:num)'] = 'attendees/show_all/$1/$2';
 

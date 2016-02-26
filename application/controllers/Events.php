@@ -106,29 +106,53 @@ class Events extends CI_Controller {
   public function display_soonest(){
 
     $this->load->model('Event');
-    $table['events']= $this->Event->display_soonest();
-    $this->load->view('partials/events', $table);
+    $events= $this->Event->display_soonest();
+    $this->load->model('User');
+    $row= $this->User->find_id($this->session->userdata('id'));
+    $origin = $row['location'];
+    $this->load->view('partials/events', array(
+      'events'=> $events,
+      'origin' => $origin
+    ));
 
   }
   public function display_latest(){
 
     $this->load->model('Event');
-    $table['events']= $this->Event->display_latest();
-    $this->load->view('partials/events', $table);
+    $events= $this->Event->display_latest();
+    $this->load->model('User');
+    $row= $this->User->find_id($this->session->userdata('id'));
+    $origin = $row['location'];
+    $this->load->view('partials/events', array(
+      'events'=> $events,
+      'origin' => $origin
+    ));
 
   }
   public function display_spots_most(){
 
     $this->load->model('Event');
-    $table['events']= $this->Event->display_spots_most();
-    $this->load->view('partials/events', $table);
+    $events= $this->Event->display_spots_most();
+    $this->load->model('User');
+    $row= $this->User->find_id($this->session->userdata('id'));
+    $origin = $row['location'];
+    $this->load->view('partials/events', array(
+      'events'=> $events,
+      'origin' => $origin
+    ));
 
   }
    public function display_spots_least(){
 
     $this->load->model('Event');
-    $table['events']= $this->Event->display_spots_least();
-    $this->load->view('partials/events', $table);
+    $events= $this->Event->display_spots_least();
+    $this->load->model('User');
+    $row= $this->User->find_id($this->session->userdata('id'));
+    $origin = $row['location'];
+    $this->load->view('partials/events', array(
+      'events'=> $events,
+      'origin' => $origin
+    ));
 
   }
 
@@ -159,6 +183,16 @@ class Events extends CI_Controller {
   $this->output
        ->set_content_type('application/json')
        ->set_output($html);
+ }
+ public function distance_from_origin(){
+  $new_origin=$this->input->post('city');
+  $this->load->model('Event');
+  $events= $this->Event->display_everything();
+    $this->load->view('partials/events', array(
+      'events'=> $events,
+      'origin' => $new_origin
+    ));
+
  }
 
 }
