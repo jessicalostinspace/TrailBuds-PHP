@@ -3,7 +3,7 @@
 
 ?>
 		
-		<div id='special'><h5><?php echo 'Showing Results for ' . $origin ?></h5></div>	
+		<div id='special'><h5><?php echo 'Showing Results for ' . $origin . "..."?></h5></div>	
 		<?php
 
 		foreach ($events as $event) {
@@ -50,7 +50,7 @@
 			  		</div>
 			      <?php //were going to want to set a variable for image here, need to add that to the events database and the create event modal ?>
 			      <div class="caption">
-			        <h3><a href=<?php echo "'/show/" . $event['id'] . "'" ?>><?php echo $event['name'] ?> </a></h3>
+			        <h3><a href=<?php echo "'/show/" . $event['id'] . "/" . $origin_point . "'" ?>><?php echo $event['name'] ?> </a></h3>
 			        <p><?php echo $event['description'] ?></p> 
 			      </div>
 			  	</div>

@@ -59,7 +59,8 @@ $route['distance/(:any)/(:any)']='events/distance/$1/$2';
 
 $route['all'] = 'events/show_all';
 $route['create_event'] = 'events/create';
-$route['show/(:any)'] = 'events/show/$1';
+$route['show/(:any)/(:any)'] = 'events/show/$1/$2';
+$route['events/events/show_all1']='events/show_all1';
 
 // $route['default_controller'] = 'events';
 $route['404_override'] = '';

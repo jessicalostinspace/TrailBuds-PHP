@@ -77,7 +77,7 @@
   // initialize the map with line between the departure location and the hike location
   function initMap() {
 
-    var origin = "<?= $event['departure_location'] ?>";
+    var origin = "<?= $origin_point ?>";
     var destination = "<?= $event['hike_location'] ?>";
 
     var map = new google.maps.Map(document.getElementById('map'), {

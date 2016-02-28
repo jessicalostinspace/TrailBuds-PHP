@@ -89,6 +89,13 @@ class Events extends CI_Controller {
 
 
   }
+  public function show_all1()
+  {
+    $table['origin']=$this->input->post('city');
+    $this->load->view('events_new_origin', $table);
+
+
+  }
   public function display_all_events(){
 
     $this->load->model('Event');
@@ -116,6 +123,17 @@ class Events extends CI_Controller {
     ));
 
   }
+  public function display_soonest1(){
+
+    $this->load->model('Event');
+    $events= $this->Event->display_soonest();
+    $origin=$this->input->post('city');
+    $this->load->view('partials/events', array(
+      'events'=> $events,
+      'origin' => $origin
+    ));
+  }
+ 
   public function display_latest(){
 
     $this->load->model('Event');
@@ -155,14 +173,57 @@ class Events extends CI_Controller {
     ));
 
   }
+     public function display_soonest2($origin){
+
+    $this->load->model('Event');
+    $events= $this->Event->display_soonest();
+    $this->load->view('partials/events', array(
+      'events'=> $events,
+      'origin' => $origin
+    ));
+  }
+  public function display_latest2($origin){
+
+    $this->load->model('Event');
+    $events= $this->Event->display_latest();
+    $this->load->view('partials/events', array(
+      'events'=> $events,
+      'origin' => $origin
+    ));
+
+  }
+  public function display_spots_most2($origin){
+
+    $this->load->model('Event');
+    $events= $this->Event->display_spots_most();
+    $this->load->view('partials/events', array(
+      'events'=> $events,
+      'origin' => $origin
+    ));
+
+  }
+  public function display_spots_least2($origin){
+
+    $this->load->model('Event');
+    $events= $this->Event->display_spots_least();
+    $this->load->view('partials/events', array(
+      'events'=> $events,
+      'origin' => $origin
+    ));
+
+  }
 
   // needs to take in parameter for event
-  public function show($id)
+  public function show($id, $origin)
   {
-    $view_data['event'] = $this->Event->show_by_id($id);
-    $view_data['current_user_id'] = (int) $this->session->userdata['id']['id'];
+    $event = $this->Event->show_by_id($id);
+    $current_user_id = (int) $this->session->userdata['id']['id'];
     // $view_data['messages'] = $this->Message->get_all_event_messages($this->session->userdata('id'));
-    $this->load->view('single_event', $view_data);
+    $this->load->view('single_event', array(
+      'event'=> $event,
+      'current_user_id'=>$current_user_id,
+      'origin_point'=>$origin
+      ));
   }
 
   public function google(){
@@ -183,16 +244,6 @@ class Events extends CI_Controller {
   $this->output
        ->set_content_type('application/json')
        ->set_output($html);
- }
- public function distance_from_origin(){
-  $new_origin=$this->input->post('city');
-  $this->load->model('Event');
-  $events= $this->Event->display_everything();
-    $this->load->view('partials/events', array(
-      'events'=> $events,
-      'origin' => $new_origin
-    ));
-
  }
 
 }

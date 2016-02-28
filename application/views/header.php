@@ -176,8 +176,13 @@ function logOutWithFacebook() {
 ?>
           <li><a href="/profile/<?= $this->session->userdata('id')['id'] ?>">Profile</a></li>
 <?php }
+
+$location3=str_replace(' ', '', $this->session->userdata('location'));
+$location=str_replace(',', '', $location3);
+
+
 ?>
-          <li><a href="/all">Events</a></li>
+          <li><a href=<?php echo "'/events/show_all'" ?>>Events</a></li>
 <?php
           if($logged_in){
 ?>

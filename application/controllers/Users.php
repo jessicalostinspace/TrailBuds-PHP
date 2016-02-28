@@ -90,7 +90,7 @@ class Users extends CI_Controller {
     $found_user = $this->User->find($user['id']);
 
    
-
+    $this->session->set_userdata('location', $found_user['location']);
 
     //Set user auto-incremented ID from database
     $user_id = $this->User->getUserID($user['id']);
@@ -106,7 +106,6 @@ class Users extends CI_Controller {
                           'gender' => $user['gender'],
                           'picture_url' => $user['picture']['url'],
                           'logged_in' => TRUE
-                          //'location' => $found_user['location']
                           );
 
     // if found, set their data to session

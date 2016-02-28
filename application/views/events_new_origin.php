@@ -1,3 +1,4 @@
+
 <?php require_once('header.php'); ?>
 
 
@@ -31,7 +32,7 @@
       </div>
     </div>
     <div id='city_searchbar' class="form-group col-xs-7">
-      <form role='form' method='post' action='events/show_all1' id='searchform'>
+      <form role='form' method='post' id='searchform'>
         <input id="autocomplete"  type="search" class="form-control input-lg" name='city' placeholder="Enter your city" autofocus>
        <input type="submit" class="btn btn-default btn-md" id='searchbtn' value='Search'>
       </form>
@@ -177,11 +178,16 @@
 </div>
 
 
+<?php
+$origin1=str_replace(" ", '', $origin);
+$origin2=str_replace(",", '', $origin1);
+
+?>
 
 <script type='text/javascript'>
 $(document).ready(function(){
 
-  $.get('/events/display_all_events', function(res){
+  $.get(<?php echo "'/events/display_soonest2/" . $origin2 .  "'"?>, function(res){
     $('#orange').html(res);
   });
   <?php
@@ -214,34 +220,33 @@ $(document).ready(function(){
     
     
     $('#btn1').click(function(){
-      $.get('/events/display_soonest', function(res){
+      $.get(<?php echo "'/events/display_soonest2/" . $origin2 .  "'"?>, function(res){
         $('#orange').html(res);
       });
       return false;
     });
     $('#btn2').click(function(){
-      $.get('/events/display_latest', function(res){
+      $.get(<?php echo "'/events/display_latest2/" . $origin2 .  "'"?>, function(res){
         $('#orange').html(res);
       });
       return false;
     });
     $('#btn3').click(function(){
-      $.get('/events/display_spots_least', function(res){
+      $.get(<?php echo "'/events/display_spots_least2/" . $origin2 .  "'"?>, function(res){
         $('#orange').html(res);
       });
       return false;
     });
      $('#btn4').click(function(){
-      $.get('/events/display_spots_most', function(res){
+      $.get(<?php echo "'/events/display_spots_most2/" . $origin2 .  "'"?>, function(res){
         $('#orange').html(res);
       });
       return false;
     });
      
-    $('form').submit(function(){
+     $('form').submit(function(){
       window.location.href='/show_all1';
     });
-
  });
 </script>
  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyApbO-TW6-gkolVfdL1uKgqDCP2rC3fg2A&libraries=places">

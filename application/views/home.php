@@ -28,7 +28,7 @@ input:focus {
        <div id="city_border" class="col-sm-4">
         <div class="form-group col-sm-4">
            <h1><label style="color:white;" for="city">Find a trail buddy</label></h1>
-           <form action='distance_from_origin' method='post'>
+           <form action='events/show_all1' method='post'>
              <input id="autocomplete" type="search" class="form-control input-lg" name="city" placeholder="Enter your city" >
            </form>
         </div>
